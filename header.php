@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&family=Space+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&family=Poppins:wght@300&family=Space+Mono:ital,wght@0,400;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
 
@@ -51,7 +50,7 @@
                 <li>
                 <a href="http://photography-mota.local/a-propos/">À propos</a>
                 </li>
-                <li><a id="popup-trigger" href="#">Contact</a></li>
+                <li><a id="popup-trigger" >Contact</a></li>
             </ul>
         </div>
         

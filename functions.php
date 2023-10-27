@@ -36,8 +36,13 @@ add_action('wp_enqueue_scripts', 'enqueue_theme_scripts');
 
 function ajouter_scripts() {
     wp_enqueue_script('script', get_template_directory_uri() . '/script.js', array('jquery'), null, true);
-}
+    wp_enqueue_script('custom', get_template_directory_uri() . '/custom.js', array('jquery'), null, true);
 
+    wp_localize_script('custom', 'popup_data', array(
+        'ref' => esc_attr(get_post_meta(get_the_ID(), 'reference', true))
+    ));
+
+}
 add_action('wp_enqueue_scripts', 'ajouter_scripts');
 
 function ajouter_element_personnalise_menu($items, $args) {
@@ -54,30 +59,3 @@ register_nav_menus(array(
     'footer' => 'Bas de page',
 ));
 
-
-function register_post_types() {
-	// La déclaration de nos Custom Post Types et Taxonomies ira ici
-}
-add_action( 'init', 'register_post_types' );
-// CPT Portfolio
-$labels = array(
-    'name' => 'Portfolio',
-    'all_items' => 'Tous les projets',  // affiché dans le sous menu
-    'singular_name' => 'Projet',
-    'add_new_item' => 'Ajouter un projet',
-    'edit_item' => 'Modifier le projet',
-    'menu_name' => 'Portfolio'
-);
-
-$args = array(
-    'labels' => $labels,
-    'public' => true,
-    'show_in_rest' => true,
-    'has_archive' => true,
-    'supports' => array( 'title', 'editor','thumbnail' ),
-    'menu_position' => 5, 
-    'menu_icon' => 'dashicons-admin-customizer',
-);
-
-register_post_type( 'portfolio', $args );
-add_action( 'init', 'register_post_types' ); // Le hook init lance la fonction
