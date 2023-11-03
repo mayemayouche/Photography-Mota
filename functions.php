@@ -1,61 +1,64 @@
 <?php
-// Ajouter la prise en charge des images mises en avant
 add_theme_support('post-thumbnails');
 
-function PhotographyMota_add_admin_pages() {
-    add_menu_page(
-        'Paramètres du thème PhotographyMota',
-        'PhotographyMota',
-        'manage_options',
-        'PhotographyMota-settings',
-        'PhotographyMota_theme_settings',
-        'dashicons-admin-settings',
-        60
-    );
-}
-
-function PhotographyMota_theme_settings() {
-    echo '<h1>' . get_admin_page_title() . '</h1>';
-}
-
-add_action('admin_menu', 'PhotographyMota_add_admin_pages', 10);
-
-function enqueue_theme_styles() {
+function enqueue_theme_assets() {
     wp_enqueue_style('PhotographyMota-style', get_stylesheet_uri());
-}
-
-add_action('wp_enqueue_scripts', 'enqueue_theme_styles');
-
-function enqueue_theme_scripts() {
-    // Enregistrez jQuery depuis la bibliothèque CDN de Google
     wp_deregister_script('jquery');
     wp_enqueue_script('jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', array(), '3.5.1', true);
-}
-
-add_action('wp_enqueue_scripts', 'enqueue_theme_scripts');
-
-function ajouter_scripts() {
     wp_enqueue_script('script', get_template_directory_uri() . '/script.js', array('jquery'), null, true);
-    wp_enqueue_script('custom', get_template_directory_uri() . '/custom.js', array('jquery'), null, true);
+    wp_localize_script('script', 'frontendajax', array('ajaxurl' => admin_url('admin-ajax.php')));
+}
 
-    wp_localize_script('custom', 'popup_data', array(
-        'ref' => esc_attr(get_post_meta(get_the_ID(), 'reference', true))
+add_action('wp_enqueue_scripts', 'enqueue_theme_assets');
+add_action('after_setup_theme', 'custom_image_sizes');
+
+function custom_image_sizes() {
+    // Définissez une nouvelle taille d'image en utilisant add_image_size
+    // 'full-size-1025' est le nom de la taille, vous pouvez le personnaliser
+    add_image_size('full-size-1025', 1025, 0, true);
+
+    // Ajoutez ce format à l'ensemble des images disponibles
+    add_filter('image_size_names_choose', 'custom_image_size_names');
+}
+
+function custom_image_size_names($sizes) {
+    $new_sizes = array_merge($sizes, array(
+        'full-size-1025' => __('Full Size (1025px)'),
     ));
-
+    return $new_sizes;
 }
-add_action('wp_enqueue_scripts', 'ajouter_scripts');
 
-function ajouter_element_personnalise_menu($items, $args) {
-    if ($args->theme_location == 'main') {
-        $items .= '<li><a id="popup-trigger" href="#">Contact</a></li>';
+// AJAX
+add_action('wp_ajax_load_more_photos', 'load_more_photos_function');
+add_action('wp_ajax_nopriv_load_more_photos', 'load_more_photos_function');
+
+function get_additional_images($offset) {
+    $args = array(
+        'post_type' => 'post', 
+        'posts_per_page' => 8, 
+        'offset' => $offset, 
+    );
+
+    $query = new WP_Query($args);
+
+    return $query->posts;
+}
+
+function load_more_photos_function() {
+    $offset = isset($_POST['offset']) ? intval($_POST['offset']) : 0;
+    
+    $additional_images = get_additional_images($offset);
+    
+    $html = '';
+
+    foreach ($additional_images as $image) {
+        $html .= '<div class="image"><img src="' . get_the_post_thumbnail_url($image) . '"></div>';
     }
-    return $items;
+
+    echo $html;
+
+    wp_die();
 }
 
-add_filter('wp_nav_menu_items', 'ajouter_element_personnalise_menu', 10, 2);
 
-register_nav_menus(array(
-    'main' => 'Menu Principal',
-    'footer' => 'Bas de page',
-));
-
+?>

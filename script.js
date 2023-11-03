@@ -1,38 +1,30 @@
 jQuery(document).ready(function($) {
-    // Gérer le clic sur le bouton du menu burger
+    // Gestion du menu mobile
     $('.menu-burger-toggle').click(function() {
-        $('.mobile-menu').toggle(); // Afficher/masquer le menu mobile
+        $(this).toggleClass('open');
+        $('.mobile-menu').toggle();
     });
-});
-jQuery(document).ready(function($) {
-    $('#filter-form select').change(function() {
-        var category = $('#category-filter').val();
-        var format = $('#format-filter').val();
-        var sortOrder = $('#sort-order').val();
 
-        // Effectuez une requête AJAX pour récupérer les images en fonction des filtres
-        $.ajax({
-            url: 'votre-url-de-traitement.php', // Remplacez par l'URL de votre script PHP de traitement
-            type: 'POST',
-            data: {
-                category: category,
-                format: format,
-                sortOrder: sortOrder
-            },
-            success: function(data) {
-                // Remplacez le contenu du conteneur de la galerie par les nouvelles images
-                $('#gallery-container').html(data);
-            }
+
+        // Ouvrir la lightbox au clic sur l'icône "plein écran"
+        $('.full-screen').click(function(e) {
+            e.preventDefault();
+            var fullImage = $(this).data('fullimage');
+            console.log("Lien vers l'image en taille réelle : " + fullImage);
+    
+            // Mettez à jour le contenu de la lightbox avec l'image en taille réelle
+            $('#custom-lightbox img').attr('src', fullImage);
+            console.log("Chemin de l'image mise à jour : " + $('#custom-lightbox img').attr('src'));
+            console.log("Élément image de la lightbox : " + $('#custom-lightbox img').length);
+            console.log("Lien vers l'image en taille réelle : " + fullImage);
+            // Affichez la lightbox
+            $('#custom-lightbox').fadeIn();
+            console.log("Lightbox affichée.");
+        });
+    
+        // Fermer la lightbox au clic sur le bouton "Fermer"
+        $('#close-lightbox').click(function() {
+            $('#custom-lightbox').fadeOut();
         });
     });
-});
-
-jQuery(document).ready(function($) {
-    $(".custom-image").each(function() {
-        $(this).css({
-            "max-width": "600px",  // Personnalisez la largeur comme vous le souhaitez
-            "height": "auto"  // Assure le maintien du ratio hauteur/largeur
-        });
-    });
-});
-
+    
