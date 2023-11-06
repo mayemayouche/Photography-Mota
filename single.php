@@ -103,9 +103,11 @@
 </div>
 
 <!-- Chargement des photos -->
-<div class="charger">
-<a class="bouton-link" href="#">Toutes les photos</a>
 
+<!-- Chargement des photos -->
+<div class="charger">
+<a id="load-more-photos" class="bouton-link" href="#">Toutes les photos</a></div>
+<div id="additional-photos-container" class="new-rows"></div>
 </main>
     </div>
 </div>

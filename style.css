@@ -322,6 +322,12 @@ color: white; /* Définissez la couleur du texte sur blanc */
     overflow: hidden; /* Pour masquer le contenu dépassant la div */
 }
 
+.entry-content .imagepost img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 .navigation img {
     max-width: 100%; /* L'image aura une largeur maximale de 100% de la div */
     max-height: 100%; /* L'image aura une hauteur maximale de 100% de la div */
@@ -348,6 +354,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     font-family: space mono;
     margin: 25px auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -418,10 +425,6 @@ color: white; /* Définissez la couleur du texte sur blanc */
 }
 
 
-.row {
-    display: flex;
-    width: 100%;
-}
 
 
 .lemenu {
@@ -439,19 +442,34 @@ color: white; /* Définissez la couleur du texte sur blanc */
     justify-content: flex-end;
 }
 
-.conteneur-choix2{
-
-}
 .choix{
     margin-right: 20px;
 }
-.lagalerie, .galerieidem {
+.lagalerie, .galerieidem{
     flex-wrap: wrap;
     width: 1140px;
     margin: 0 auto;
-    /* Pour centrer la galerie horizontalement */
 }
 
+
+.bouton-link {
+    align-self: center; /* Centre le bouton horizontalement */
+}
+.row {
+    display: flex;
+    width: 100%;
+}
+.new-rows .additional-photos-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: calc(50% - 10px);
+    position: relative;
+    /* Permet de positionner les éléments enfants de façon absolue par rapport à ce conteneur */
+    height: 500px;
+    overflow: hidden;
+    margin: 5px;
+}
 .contenuphoto {
     position: relative;
     /* Permet de positionner les éléments enfants de façon absolue par rapport à ce conteneur */

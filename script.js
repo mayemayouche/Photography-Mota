@@ -14,9 +14,7 @@ jQuery(document).ready(function($) {
     
             // Mettez à jour le contenu de la lightbox avec l'image en taille réelle
             $('#custom-lightbox img').attr('src', fullImage);
-            console.log("Chemin de l'image mise à jour : " + $('#custom-lightbox img').attr('src'));
-            console.log("Élément image de la lightbox : " + $('#custom-lightbox img').length);
-            console.log("Lien vers l'image en taille réelle : " + fullImage);
+            
             // Affichez la lightbox
             $('#custom-lightbox').fadeIn();
             console.log("Lightbox affichée.");
@@ -27,4 +25,41 @@ jQuery(document).ready(function($) {
             $('#custom-lightbox').fadeOut();
         });
     });
+    jQuery(document).ready(function($) {
+        var page = 2; // La page à charger (2 pour la deuxième page, 3 pour la troisième, etc.)
+        var canLoad = true; // Pour empêcher le chargement répété
+        
+        $('#load-more-photos').click(function(e) {
+            e.preventDefault();
+            
+            if (!canLoad) {
+                return;
+            }
+        
+            canLoad = false;
+        
+            var data = {
+                action: 'load_more_photos',
+                page: page,
+            };
+        
+            $.ajax({
+                url: custom_script_params.ajaxurl,
+                data: data,
+                type: 'POST',
+                success: function(response) {
+                    if (response) {
+                        $('#additional-photos-container.new-rows').append(response); // Ajoutez les nouvelles photos aux nouvelles lignes
+                        page++;
+                        canLoad = true;
+                    } else {
+                        $('#load-more-photos').hide(); // Plus de photos à charger
+                    }
+                }
+            });
+        });
+    });
+    
+    
+    
     

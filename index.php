@@ -50,13 +50,13 @@
 
     <div class="lagalerie">
         <?php
-        $args = array(
+             $args = array(
             'post_type' => 'photo',
             'posts_per_page' => 8, 
-        );
-        $photos_query = new WP_Query($args);
+             );
+             $photos_query = new WP_Query($args);
 
-        if ($photos_query->have_posts()) {
+             if ($photos_query->have_posts()) {
             echo '<div class="row">'; 
 
             while ($photos_query->have_posts()) {
@@ -90,13 +90,18 @@
         echo '</div><div class="row">'; 
     }
 }
-        }
+       }
         ?>
     </div>
 
     <div class="plus">
   <a href="#!" class="charger" id="charger">Charger plus</a>
 </div>
+<div class="plusdephotos">
+
+
+
+
 <script>
     lightbox.option({
         'resizeDuration': 200,
