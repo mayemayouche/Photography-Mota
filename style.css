@@ -10,7 +10,7 @@ Version: 1.9
 body {
     width: 100%; /* La largeur du corps est de 100% de la fenêtre */
     max-width: 1440px; /* La largeur maximale est de 1440 pixels */
-    margin: 0 auto; /* Pour centrer le contenu */
+    margin: auto; /* Pour centrer le contenu */
 }
 
 main {
@@ -18,7 +18,9 @@ main {
     max-width: 1140px; /* Limitez la largeur du contenu à 1140 pixels */
     margin: 0 auto; /* Pour centrer le contenu */
 }
-
+#primary{
+    width:100%;
+}
 .site-content{
     max-width: 1148px;
 }
@@ -205,6 +207,7 @@ p {
 .contenttitre {
     display: flex;
     justify-content: center;
+    margin:auto;
 }
 
 .titre {
@@ -308,8 +311,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
 
 .middle{
     display: flex;
-    width:1440px;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #000;
     padding-bottom: 20px;
@@ -344,6 +346,9 @@ color: white; /* Définissez la couleur du texte sur blanc */
     text-decoration: none;
     width: 272px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+
 }
 
 .charger{
@@ -356,18 +361,39 @@ color: white; /* Définissez la couleur du texte sur blanc */
     display: flex;
     flex-direction: column;
     justify-content: center;
+    color: #000000;
+
 }
 
+#plusdephotos{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: aquamarine;
+    flex-wrap: wrap;
+    width: 1140px;
+    margin: 0 auto;
+    position: relative;
+    width: calc(100% - 10px);
+    margin: 5px;
 
+}
 .plus {
-    margin: 50px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 600px;
     height: 118px;
+    flex-direction: column;
 }
 
+.plusplus {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 118px;
+    flex-direction: row;
+    width: 600px;
+}
 .defilement {
     width: 81px;
     height: 71px;
@@ -450,7 +476,16 @@ color: white; /* Définissez la couleur du texte sur blanc */
     width: 1140px;
     margin: 0 auto;
 }
+.narrows{
+    display: flex;
+    justify-content: center;
 
+}
+.nav-arrow {
+    display: flex;
+    height: 30px;
+    justify-content: center;
+}
 
 .bouton-link {
     align-self: center; /* Centre le bouton horizontalement */
@@ -459,20 +494,25 @@ color: white; /* Définissez la couleur du texte sur blanc */
     display: flex;
     width: 100%;
 }
-.new-rows .additional-photos-container{
+.new-rows r{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     width: calc(50% - 10px);
     position: relative;
-    /* Permet de positionner les éléments enfants de façon absolue par rapport à ce conteneur */
     height: 500px;
     overflow: hidden;
     margin: 5px;
 }
+
+#additional-photos-container{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: relative;
+}
 .contenuphoto {
     position: relative;
-    /* Permet de positionner les éléments enfants de façon absolue par rapport à ce conteneur */
     width: calc(50% - 10px);
     height: 500px;
     overflow: hidden;
@@ -544,65 +584,68 @@ color: white; /* Définissez la couleur du texte sur blanc */
 text-transform: uppercase;}
 
     /* Lightbox*/
-    #custom-lightbox {
+    
+    #lightbox-container {
         position: fixed;
-        top: 0;
+        z-index: 9999;
         left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.8); /* Fond noir semi-transparent */
-        display: none;
-        align-items: center;
-        justify-content: center;
-        z-index: 999;
-    }
-    
-    .lightbox-overlay {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(128, 128, 128, 0.7);
-        /* Couleur de fond grise semi-transparente */
+        background: rgba(0, 0, 0, 0.9);
         display: flex;
-        align-items: center;
+        flex-direction: column;
         justify-content: center;
-        opacity: 0;
-        /* L'overlay est initialement transparent */
-        transition: opacity 0.3s;
+        align-items: center;
     }
     
-    .lightbox-content {
+    #lightbox-content {
         position: relative;
-        background: #fff;
-        padding: 20px;
-        text-align: center;
         display: flex;
         align-items: center;
         justify-content: center;
-        top:20px;
-        left:0;
-        right:0;
-        height:500px;
-        width:500px;
-        overflow: hidden;
+        max-width: 80%;
+        max-height: 80%;
     }
     
-    .lightbox-close {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        background: transparent;
-        border: none;
-        font-size: 20px;
-        color: #fff;
-        cursor: pointer;
-    }
-    
-    .contenuimg{
+    #lightbox-image {
+        max-width: 100%;
+        max-height: 100%;
         object-fit: contain;
     }
+    
+    .lightbox-nav {
+        position: absolute;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+        user-select: none;
+    }
+    
+    #lightbox-nav-left {
+        left: -50px; /* Adjust as needed */
+    }
+    
+    #lightbox-nav-right {
+        right: -50px; /* Adjust as needed */
+    }
+    
+    #lightbox-title {
+        margin-top: 20px;
+        color: white;
+        text-align: center;
+    }
+    
+    #lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        color: white;
+        cursor: pointer;
+        font-size: 30px;
+    }
+    
+    
 /* Pour les écrans mobiles*/
 
 
@@ -610,7 +653,12 @@ text-transform: uppercase;}
     .headermenu {
         display: none;
     }
-
+.photohead{
+    width: 100%;
+}
+.contenttitre{
+    width: 50%;
+}
     .row {
         flex-wrap: wrap;
     }

@@ -39,14 +39,7 @@
     </div>
     
 
-  <!-- Chargement des photos de la même catégorie 
-  <div class="lightbox">
-        <button class="lightbox_next">Suivante</button>
-        <button class="lightbox_prev">Précédente</button>
-        <div class="lightbox_container">-->
-       
-        </div>
-    </div>
+
 
     <div class="lagalerie">
         <?php
@@ -63,24 +56,27 @@
                 $photos_query->the_post();
                 $thumbnail = wp_get_attachment_image(get_post_thumbnail_id(), array(500, 500));
             
-                echo '<div class="contenuphoto">
-                    ' . $thumbnail . '
-                    <p class="description">' . get_the_excerpt() . '</p>
-                    <div class="overlay">
-                        <div class="icone">
-                            <img src="' . get_template_directory_uri() . '/images/eye-svgrepo-com.svg" class="oeil" alt="icone oeil">
-                        </div>
-                        <div class="full-screen" data-fullimage="' . wp_get_attachment_image_url(get_post_thumbnail_id(), 'small') . '">
-                            <img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.svg" class="full" alt="plein ecran">
-                        </div>
-                        <div class="title-little">
-                            <h3 class="photo-title">' . get_the_title() . '</h3>
-                        </div>
-                        <div class="cat-little">
-                            <p class="photo-category">' . get_the_category()[0]->name . '</p>
-                        </div>
-                    </div>
-                </div>';
+                echo '<div class="contenuphoto">' .
+                $thumbnail .
+                '<p class="description">' . $description . '</p>' .
+                '<a href="' . get_permalink() . '" class="overlay-link">' .
+                '<div class="overlay">' .
+                    '<div class="icone">' .
+                        '<img src="' . get_template_directory_uri() . '/images/eye-svgrepo-com.svg" class="oeil" alt="icone oeil">' .
+                    '</div>' .
+                    '<div class="full-screen" data-fullimage="' . wp_get_attachment_image_url(get_post_thumbnail_id(), 'small') . '">' .
+                        '<img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.svg" class="full" alt="plein ecran">' .
+                    '</div>' .
+                    '<div class="title-little">' .
+                        '<h3 class="photo-title">' . $title . '</h3>' .
+                    '</div>' .
+                    '<div class="cat-little">' .
+                        '<p class="photo-category">' . $category . '</p>' .
+                    '</div>' .
+                '</div>' . // Fin de .overlay
+                '</a>' . // Fin de .overlay-link
+                '</div>'; // Fin de .contenuphoto
+                
             
             
     
@@ -95,28 +91,25 @@
     </div>
 
     <div class="plus">
-  <a href="#!" class="charger" id="charger">Charger plus</a>
+    <div class="charger">
+<a id="charger-plus" class="charger" href="#">Charger plus</a></div>
+    </div>
+
+<!-- Lightbox container -->
+<div id="lightbox-container" style="display: none;">
+    <div id="lightbox-content">
+        <div id="lightbox-nav-left" class="lightbox-nav">&lt;</div>
+        <img id="lightbox-image" src="" alt="Image en plein écran">
+        <div id="lightbox-nav-right" class="lightbox-nav">&gt;</div>
+    </div>
+        <div id="lightbox-title">Titre de l'image</div>
+        <span id="lightbox-close">&times;</span>
+    </div>
 </div>
-<div class="plusdephotos">
 
 
-
-
-<script>
-    lightbox.option({
-        'resizeDuration': 200,
-        'wrapAround': true
-    });
-</script>
 
 </main>
 
-<div id="custom-lightbox">
-    <div class="lightbox-content">
-        <div class="contenuimg">
-        <img src="" alt="Image en taille réelle">
-        </div>
-        <button id="close-lightbox" class="lightox-close">×</button>
-    </div>
-</div>
+
 <?php get_footer(); ?>
