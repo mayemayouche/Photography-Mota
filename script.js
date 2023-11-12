@@ -116,3 +116,27 @@ jQuery(document).ready(function($) {
         $images.hide().eq(currentIndex).show();
     });
 });
+
+//les filtres
+jQuery(document).ready(function($) {
+    $('#filter-form select').change(function() {
+        var formData = $('#filter-form').serialize();
+        console.log(formData); // Pour déboguer
+
+        $.ajax({
+            url: frontendajax.ajaxurl,
+            type: 'POST',
+            data: {
+                'action': 'filter_photos_by_category', // Assurez-vous que c'est le nom correct de l'action
+                'security': frontendajax.security,
+                'formData': formData
+            },
+            success: function(response) {
+                $('.lagalerie').html(response); // Met à jour la galerie avec la réponse
+            }
+        });
+    });
+});
+
+
+

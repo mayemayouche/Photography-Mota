@@ -104,7 +104,7 @@ form {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    flex-direction: row;
 
 }
 
@@ -439,7 +439,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     text-align: left;
 }
 
-#categorie-filtre {
+#categorie-filtre,#format-filtre, #date-filtre {
     width: 260px;
     height: 52px;
     border-radius: 5px;
@@ -467,7 +467,9 @@ color: white; /* Définissez la couleur du texte sur blanc */
     display: flex;
     justify-content: flex-end;
 }
-
+.conteneur-choix3{
+    margin-left:293px;
+}
 .choix{
     margin-right: 20px;
 }

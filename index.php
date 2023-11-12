@@ -7,36 +7,37 @@
 </div>
 
 <main>
-    <div class="lemenu">
+<div class="lemenu">
+    <form id="filter-form">
         <div class="conteneur-choix2">
             <div class="choix">
-                <form id="filter-form">
-                    <select id="categorie-filtre">
-                        <option value="">Catégories</option>
-                        <option value="mariage">Mariage</option>
-                        <option value="reception">Réception</option>
-                        <option value="television">Télévision</option>
-                    </select>
-                </div>
-                <div class="choix">
-                    <select id="categorie-filtre">
-                        <option value="">Formats</option>
-                        <option value="paysage">Paysage</option>
-                        <option value="portrait">Portrait</option>
-                    </select>
-                </div>
+                <select name="categorie_filtre" id="categorie-filtre">
+                    <option value="">Catégories</option>
+                    <option value="mariage">Mariage</option>
+                    <option value="reception">Réception</option>
+                    <option value="television">Télévision</option>
+                </select>
             </div>
-            <div class="conteneur-choix3">
-                <div class="choix">
-                    <select id="categorie-filtre">
-                        <option value="desc">Trier par</option>
-                        <option value="desc">Des plus récentes aux plus anciennes</option>
-                        <option value="asc">Des plus anciennes aux plus récentes</option>
-                    </select>
-                </div>
-            </form>
+            <div class="choix">
+                <select name="format_filtre" id="format-filtre">
+                    <option value="">Formats</option>
+                    <option value="paysage">Paysage</option>
+                    <option value="portrait">Portrait</option>
+                </select>
+            </div>
         </div>
-    </div>
+        <div class="conteneur-choix3">
+            <div class="choix">
+                <select name="date_filtre" id="date-filtre">
+                    <option value="">Trier par</option>
+                    <option value="desc">Des plus récentes aux plus anciennes</option>
+                    <option value="asc">Des plus anciennes aux plus récentes</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+
     
 
 
