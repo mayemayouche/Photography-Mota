@@ -30,7 +30,7 @@
 
     // La Lighbox
 jQuery(document).ready(function($) {
-    $('.full-screen').on('click', function(e) { // on click sur l'icône de plein écran full
+    $('.full').on('click', function(e) { // on click sur l'icône de plein écran full
         e.preventDefault(); // On empêche le comportement par défaut du lien
         var fullImageSrc = $(this).data('fullimage'); // URL de la grande image
         $('#lightbox-image').attr('src', fullImageSrc); // URL devient source de l'image de la lightbox
@@ -48,13 +48,14 @@ jQuery(document).ready(function($) {
     $('.full-screen').on('click', function() {
         var fullImageUrl = $(this).data('fullimage');
         var category = $(this).data('category');
-        var reference = $(this).data('reference');
+        var reference = $(this).data ('reference');
+
 
         // Mettre à jour la source de l'image et les informations dans la lightbox
         $('#lightbox-image').attr('src', fullImageUrl);
-        $('#lightbox-reference').text('Référence: ' + reference);
-        $('#cat-little').text('Catégorie: ' + category);
-
+        $('#lightbox-reference').text(reference);
+        $('#lightbox-category').text(category);
+       
         // Afficher la lightbox
         $('#lightbox-container').show();
     });
@@ -64,8 +65,46 @@ jQuery(document).ready(function($) {
         $('#lightbox-container').hide();
     });
 
-    // ... Autres gestionnaires d'événements ...
-
+    //FAIRE DEFILER LES POSTS DANS LA LIGHTBOX ...
+    jQuery(document).ready(function($) {
+        var currentImageIndex = 0;
+        var totalImages = $('.full-screen').length;
+    
+        $('.full-screen').on('click', function() {
+            currentImageIndex = $(this).data('index');
+            updateLightbox($(this));
+        });
+    
+        $('#lightbox-prev').on('click', function() {
+            if (currentImageIndex > 0) {
+                currentImageIndex--;
+                updateLightbox($('.full-screen').eq(currentImageIndex));
+            }
+        });
+    
+        $('#lightbox-next').on('click', function() {
+            if (currentImageIndex < totalImages - 1) {
+                currentImageIndex++;
+                updateLightbox($('.full-screen').eq(currentImageIndex));
+            }
+        });
+    
+        function updateLightbox(element) {
+            var fullImageUrl = element.data('fullimage');
+            var category = element.data('category');
+            var reference = element.data('reference');
+    
+            // Mettre à jour la source de l'image et les informations dans la lightbox
+            $('#lightbox-image').attr('src', fullImageUrl);
+            $('#lightbox-reference').text(reference);
+            $('#lightbox-category').text(category);
+        }
+    
+        // Gestionnaire pour fermer la lightbox
+        $('#lightbox-close').on('click', function() {
+            $('#lightbox-container').hide();
+        });
+    });
 
     //GALERIE ACCUEIL - CHARGER PLUS
 jQuery(document).ready(function($) {
