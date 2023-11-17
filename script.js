@@ -1,26 +1,73 @@
-jQuery(document).ready(function($) {
     // Gestion du menu mobile
+    jQuery(document).ready(function($) {
     $('.menu-burger-toggle').click(function() {
         $(this).toggleClass('open');
         $('.mobile-menu').toggle();
     });
-
-jQuery(document).ready(function($) {
-    // Lorsque l'utilisateur clique sur l'icône de plein écran
-    $('.full-screen').on('click', function(e) {
-        e.preventDefault(); // Empêcher le comportement par défaut du lien
-        var fullImageSrc = $(this).data('fullimage'); // Obtenir l'URL de la grande image
-        $('#lightbox-image').attr('src', fullImageSrc); // Définir l'URL comme source de l'image de la lightbox
-        $('#lightbox-container').show(); // Afficher la lightbox
     });
 
-    // Lorsque l'utilisateur clique sur le bouton de fermeture de la lightbox
+    jQuery(document).ready(function($) {
+        $('#test-button').on('click', function() {
+            console.log('Test button clicked');
+
+            var reference = $(this).data('reference');
+
+        // Remplit le champ du formulaire avec la référence, si le champ existe
+        if ($('#ref').length) {
+            $('#ref').val(reference);
+        }
+            $('.popup-overlay').show();
+        });
+
+        $('.popup-overlay').on('click', function() {
+            $('.popup-overlay').hide();
+        });
+    
+    $('.popup-close').click(function() {
+        $('.popup-overlay').hide();
+    });
+    });   
+
+    // La Lighbox
+jQuery(document).ready(function($) {
+    $('.full-screen').on('click', function(e) { // on click sur l'icône de plein écran full
+        e.preventDefault(); // On empêche le comportement par défaut du lien
+        var fullImageSrc = $(this).data('fullimage'); // URL de la grande image
+        $('#lightbox-image').attr('src', fullImageSrc); // URL devient source de l'image de la lightbox
+        $('#lightbox-container').show(); 
+    });
+
+    // click sur le bouton de fermeture de la lightbox
     $('#lightbox-close').on('click', function() {
-        $('#lightbox-container').hide(); // Cacher la lightbox
+        $('#lightbox-container').hide(); 
     });
 });
 
-    
+//RECUPERATION DONNES DANS LIGHTBOX
+jQuery(document).ready(function($) {
+    $('.full-screen').on('click', function() {
+        var fullImageUrl = $(this).data('fullimage');
+        var category = $(this).data('category');
+        var reference = $(this).data('reference');
+
+        // Mettre à jour la source de l'image et les informations dans la lightbox
+        $('#lightbox-image').attr('src', fullImageUrl);
+        $('#lightbox-reference').text('Référence: ' + reference);
+        $('#cat-little').text('Catégorie: ' + category);
+
+        // Afficher la lightbox
+        $('#lightbox-container').show();
+    });
+
+    // Gestionnaire pour fermer la lightbox
+    $('#lightbox-close').on('click', function() {
+        $('#lightbox-container').hide();
+    });
+
+    // ... Autres gestionnaires d'événements ...
+
+
+    //GALERIE ACCUEIL - CHARGER PLUS
 jQuery(document).ready(function($) {
     var page = 1; // La page initiale est définie à 1
 
@@ -28,7 +75,7 @@ jQuery(document).ready(function($) {
         e.preventDefault();
         var button = $(this);
 
-        button.text('Chargement...'); // Indicateur visuel du chargement
+        button.text('Chargement en cours...'); //Pour mettre un message sur le bouton
 
         var data = {
             'action': 'charger_plus_photos',
@@ -38,23 +85,24 @@ jQuery(document).ready(function($) {
 
         $.post(frontendajax.ajaxurl, data, function(response) {
             if (response) {
-                // Créez un élément temporaire pour contenir la réponse
+                // sert à verifier si il y a une reponse du serveur et s'il y a des donnés
                 var $temp = $('<div></div>').html(response);
-                // Trouvez toutes les div .contenuphoto dans la réponse
+                // si reponse oui au if, alors une div est créée avec le contenu de la réponse
+                // on va chercher tous les elements ayant cette classe
                 var $photos = $temp.find('.contenuphoto');
                 
-                // Insérer les photos par paires dans des divs .row
+                // Mise en page des photos dans les divs .row
                 var $row = $('<div class="row"></div>');
                 $photos.each(function(index, photo) {
                     $row.append(photo);
-                    // Après avoir ajouté deux photos ou à la fin, insérez la div .row et créez une nouvelle
+                    // Après avoir ajouté deux photos on insére la div .row et on crée une nouvelle
                     if ((index + 1) % 2 === 0 || index + 1 === $photos.length) {
                         $('.plus').before($row);
-                        $row = $('<div class="row"></div>'); // Créez une nouvelle div .row pour les prochaines photos
+                        $row = $('<div class="row"></div>'); // Nouvelle div .row pour les prochaines photos
                     }
                 });
 
-                page++; // Incrémentez la variable de page pour charger les suivantes au prochain clic
+                page++; // click suivant pour charger d'autres photos
                 button.text('Charger plus'); // Réinitialiser le texte du bouton
             } else {
                 button.text('Plus de photos à charger'); // Message si plus de photos
@@ -65,9 +113,11 @@ jQuery(document).ready(function($) {
         });
     });
 });
-});
+
+
+//GESTION DE L'OVERLAY ET DE SES ELEMENTS//
+
 jQuery(document).ready(function($) {
-    // Gestionnaire de clic pour l'overlay, mais pas pour l'icône à l'intérieur
     $(document).on('click', '.overlay-link', function(event) {
         // Ici, le clic sur l'overlay entraînera la navigation vers le post.
         // Pas besoin de faire quoi que ce soit, le comportement par défaut du lien s'occupera de la navigation.
@@ -78,13 +128,11 @@ jQuery(document).ready(function($) {
         event.preventDefault(); // Empêche le lien de s'activer
         event.stopPropagation(); // Empêche l'événement de remonter aux parents
 
-        // Ici, vous pouvez ajouter votre logique pour afficher l'image en plein écran.
-        // Par exemple, ouvrir une lightbox ou une nouvelle fenêtre avec l'image en plein écran.
+        
         var fullImageUrl = $(this).data('fullimage');
         console.log('Ouvrir image en plein écran pour:', fullImageUrl);
 
-        // Logique pour ouvrir l'image en plein écran ici
-        // ...
+        
     });
 
     // Si la div .icone doit également empêcher la navigation, ajoutez ceci
@@ -92,42 +140,20 @@ jQuery(document).ready(function($) {
         event.preventDefault();
         event.stopPropagation();
 
-        // Logique pour l'icône ici
-        // ...
-    });
-});
-jQuery(document).ready(function($) {
-    var $navigation = $('.navigation');
-    var $images = $navigation.find('.gallery-item');
-    var currentIndex = 0; // Commencez par la première image
-
-    // Cachez toutes les images sauf la première
-    $images.hide().eq(currentIndex).show();
-
-    // Affichez l'image précédente lorsque vous cliquez sur Précédent
-    $('.nav-arrow.prev').click(function() {
-        currentIndex = (currentIndex > 0) ? currentIndex - 1 : $images.length - 1;
-        $images.hide().eq(currentIndex).show();
-    });
-
-    // Affichez l'image suivante lorsque vous cliquez sur Suivant
-    $('.nav-arrow.next').click(function() {
-        currentIndex = (currentIndex < $images.length - 1) ? currentIndex + 1 : 0;
-        $images.hide().eq(currentIndex).show();
     });
 });
 
-//les filtres
+//GESTION DES FILTRES SUR LES MENUS DEROULANTS
 jQuery(document).ready(function($) {
-    $('#filter-form select').change(function() {
-        var formData = $('#filter-form').serialize();
-        console.log(formData); // Pour déboguer
+    $('#filter-form select').change(function() { //recupere les elements ayant cet id
+        var formData = $('#filter-form').serialize();//recupere les champs d'un formulaire
+        //et les convertit en chaine de requete (format+titre par exemple).c'est une methode JQuery
 
         $.ajax({
             url: frontendajax.ajaxurl,
             type: 'POST',
             data: {
-                'action': 'filter_photos_by_category', // Assurez-vous que c'est le nom correct de l'action
+                'action': 'filter_photos_by_category', //action defini dans ma pas function -add action
                 'security': frontendajax.security,
                 'formData': formData
             },
@@ -139,4 +165,24 @@ jQuery(document).ready(function($) {
 });
 
 
+//GALERIE MINI DE LA PAGE SINGLE//
+jQuery(document).ready(function($) {
+    var $navigation = $('.navigation');
+    var $images = $navigation.find('.gallery-item');
+    var currentIndex = 0; // on prend la 1ère image
+    // on cache les autres
+    $images.hide().eq(currentIndex).show();
 
+    // Affiche l'image précédente au click
+    $('.nav-arrow.prev').click(function() {
+        currentIndex = (currentIndex > 0) ? currentIndex - 1 : $images.length - 1;
+        $images.hide().eq(currentIndex).show();
+    });
+
+    // Affiche l'image suivante au click
+    $('.nav-arrow.next').click(function() {
+        currentIndex = (currentIndex < $images.length - 1) ? currentIndex + 1 : 0;
+        $images.hide().eq(currentIndex).show();
+    });
+});
+});

@@ -159,5 +159,19 @@ echo 'Pas de photos trouvées.';
 }
 wp_die(); // Termine la requête AJAX correctement
 }
-?>
 
+
+
+function filter_post_navigation($where){
+    global $post, $wpdb;
+
+    if ('photo' === get_post_type($post->ID)) {
+        $where .= ' AND p.post_type = \'photo\'';
+    }
+
+    return $where;
+}
+
+add_filter('get_next_post_where', 'filter_post_navigation');
+add_filter('get_previous_post_where', 'filter_post_navigation');
+?>

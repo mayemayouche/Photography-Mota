@@ -38,10 +38,6 @@
     </form>
 </div>
 
-    
-
-
-
     <div class="lagalerie">
         <?php
              $args = array(
@@ -56,7 +52,6 @@
             while ($photos_query->have_posts()) {
                 $photos_query->the_post();
                 $thumbnail = wp_get_attachment_image(get_post_thumbnail_id(), array(500, 500));
-            
                 echo '<div class="contenuphoto">' .
                 $thumbnail .
                 '<p class="description">' . $description . '</p>' .
@@ -68,26 +63,32 @@
                     '<div class="full-screen" data-fullimage="' . wp_get_attachment_image_url(get_post_thumbnail_id(), 'small') . '">' .
                         '<img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.svg" class="full" alt="plein ecran">' .
                     '</div>' .
-                    '<div class="title-little">' .
-                        '<h3 class="photo-title">' . $title . '</h3>' .
-                    '</div>' .
-                    '<div class="cat-little">' .
-                        '<p class="photo-category">' . $category . '</p>' .
-                    '</div>' .
-                '</div>' . // Fin de .overlay
-                '</a>' . // Fin de .overlay-link
-                '</div>'; // Fin de .contenuphoto
+                    '<div class="title-little">
+                    <h3 class="photo-title">' . get_the_title() . '</h3>
+                    </div>
+                    <div class="cat-little">
+                        <p class="photo-category">' . get_the_category()[0]->name . '</p>
+                    </div>
+                </div>  // Fin de overlay
+                </a>  // Fin de overlay-link
+                </div>';
                 
             
             
     
     
-    // 2 photos par ligne
-    if ($photos_query->current_post % 2 === 1) {
-        echo '</div><div class="row">'; 
-    }
-}
-       }
+   
+                // Ajoutez une condition pour fermer la ligne après chaque deux photos.
+                if ($photos_query->current_post % 2 === 1) {
+                    echo '</div><div class="row">'; // Fermez la ligne précédente et ouvrez une nouvelle ligne.
+                }
+            }
+    
+            echo '</div>'; // Fermez la dernière ligne
+            wp_reset_postdata();
+        } else {
+            echo 'Aucune photo trouvée.';
+        }
         ?>
     </div>
 
@@ -98,14 +99,31 @@
 
 <!-- Lightbox container -->
 <div id="lightbox-container" style="display: none;">
-    <div id="lightbox-content">
-        <div id="lightbox-nav-left" class="lightbox-nav">&lt;</div>
+
+    <!-- Lightbox inner container -->
+    <div id="lightbox-inner-container">
+         <!-- Fermeture de la lightbox -->
+         <span id="lightbox-close">&times;</span>
+
+        <!-- Navigation left -->
+        <div id="lightbox-nav-left" class="lightbox-nav">Précédente</div>
+        
+        <!-- Image au milieu -->
         <img id="lightbox-image" src="" alt="Image en plein écran">
-        <div id="lightbox-nav-right" class="lightbox-nav">&gt;</div>
+        
+        <!-- Navigation right -->
+        <div id="lightbox-nav-right" class="lightbox-nav">Suivante</div>
     </div>
-        <div id="lightbox-title">Titre de l'image</div>
-        <span id="lightbox-close">&times;</span>
+        <div id="lightbox-info">
+        <div id="lightbox-reference">Référence</div>
+        <div id="cat-little">Catégorie</div>
+
     </div>
+
+    <!-- Informations supplémentaires : référence et catégorie -->
+    
+    </div>
+
 </div>
 
 

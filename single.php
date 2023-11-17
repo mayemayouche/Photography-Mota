@@ -34,45 +34,59 @@
                                 <p class="plusphoto">Cette photo vous intéresse ?</p>
                             </div>
                             <div class="menu-contact">
-                                <a id="popup-trigger" class="bouton-link" href="#" data-reference="<?php echo esc_attr(get_post_meta(get_the_ID(), 'reference', true)); ?>">Contact</a>
+                                <a id="test-button" class="bouton-link" href="#" data-reference="<?php echo esc_attr(get_post_meta(get_the_ID(), 'reference', true)); ?>">Contact</a>
+                            </div>
+                            <div class="popup-overlay" style="display: none">
+                                <div class="popup-salon">
+                                    <div class="popup-form">
+                                        <img src="<?php echo get_template_directory_uri() . '/images/Contactheader.png'; ?>" class="imgForm">
+                                        <span class="popup-close"></span>
+                                    </div>
+
+                                    <?php
+                                    // On insère le formulaire de demandes de renseignements
+                                    echo do_shortcode('[contact-form-7 id="2a201c2" title="Formulaire de contact 1"]');
+                                    ?>
+                                </div>
                             </div>
                         </div>
-                    
 
-                    <!-- La petite galerie -->
-                    <div class="gallery-navigation">
-                        <div class="gallery-wrapper">
-                            <div class="navigation">
-                                <?php
-                                $args = array(
-                                    'post_type' => 'photo',
-                                    'posts_per_page' => -1, // '-1' pour obtenir tous les posts
-                                );
-                                $photo_posts = new WP_Query($args);
 
-                                if ($photo_posts->have_posts()) :
-                                    while ($photo_posts->have_posts()) : $photo_posts->the_post();
-                                        if (has_post_thumbnail()) {
-                                            $thumbnail = get_the_post_thumbnail(get_the_ID(), 'thumbnail');
-                                            echo '<div class="gallery-item">' . $thumbnail . '</div>';
-                                        }
-                                    endwhile;
-                                    wp_reset_postdata();
-                                endif;
-                                ?>
-                            </div>
-                        </div>
-                        <div class="narrows">
-                        <div class="nav-arrow prev">
-                        <img src=<?php echo get_template_directory_uri()."/images/arrow-left-short.svg"?> class="flecheG" alt="fleche gauche">
-                        </div>
-                        <div class="nav-arrow next">
-                        <img src=<?php echo get_template_directory_uri()."/images/arrow-right-short.svg"?> class="flecheD" alt="fleche droite">
-                        </div>
-                        </div>
+<!-- La petite galerie des posts -->
+         <div class="petitegalerie">    
+        <div class="post-thumbnails">
+        <?php
+ // Récupère le post précédent et suivant
+        $prev_post = get_previous_post();
+        $next_post = get_next_post();
+
+        // Affiche l'image miniature du post précédent
+        if (!empty($prev_post)) {
+        $prev_thumbnail = get_the_post_thumbnail($prev_post->ID, 'thumbnail');
+        echo '<div class="prev-post-thumbnail">' . $prev_thumbnail . '</div>';
+                            }
+
+
+        // Affiche l'image miniature du post suivant
+        if (!empty($next_post)) {
+        $next_thumbnail = get_the_post_thumbnail($next_post->ID, 'thumbnail');
+        echo '<div class="next-post-thumbnail">' . $next_thumbnail . '</div>';
+                            }
+?>
+        </div>
+        <div class="navigation-arrows">
+        <div class="nav-arrow prev">
+            <?php previous_post_link('%link', '<img src="' . get_template_directory_uri() . '/images/arrow-left-short.svg" class="flecheG" alt="fleche gauche">'); ?>
+        </div>
+        <div class="nav-arrow next">
+            <?php next_post_link('%link', '<img src="' . get_template_directory_uri() . '/images/arrow-right-short.svg" class="flecheD" alt="fleche droite">'); ?>
+        </div>
+    </div>
+</div>
                     </div>
-                    </div>
-                    </div>
+
+
+
                     <!-- Chargement des photos de la même catégorie -->
                     <div class="aussi">
                         <h3>Vous aimerez aussi</h3>
@@ -87,20 +101,20 @@
                             $category_ids[] = $category->term_id;
                         }
 
-                        // ne pas prendre ce post
+                        // Pour ne pas prendre le post en cours
                         $current_post_id = get_the_ID();
 
                         $args = array(
                             'post_type' => 'photo',
-                            'posts_per_page' => 2, 
-                            'category__in' => $category_ids, 
-                            'post__not_in' => array($current_post_id) 
+                            'posts_per_page' => 2,
+                            'category__in' => $category_ids,
+                            'post__not_in' => array($current_post_id)
                         );
 
                         $photos_query = new WP_Query($args);
 
                         if ($photos_query->have_posts()) {
-                            echo '<div class="row">'; 
+                            echo '<div class="row">';
 
                             while ($photos_query->have_posts()) {
                                 $photos_query->the_post();
@@ -108,26 +122,27 @@
                                 echo '<div class="contenuphoto">' . $thumbnail . '</div>';
                             }
 
-                            echo '</div>'; // Fermeture de la balise <div class="row">
+                            echo '</div>';
                         }
                         wp_reset_postdata();
                         ?>
-                    </div> <!-- Fermeture de la balise <div class="galerieidem"> -->
+                    </div>
 
                 </article>
 
             <?php endwhile; ?>
 
-         <!-- Fermeture de la balise <main> -->
-    </div> <!-- Fermeture de la balise <div id="primary" class="content-area"> -->
-</div> <!-- Fermeture de la balise <div id="content" class="site-content"> -->
+    </div>
 
-<!-- Chargement des photos en plus -->
+<!-- Chargement des photos en plus (id="load-more-photos" )-->
 <div class="charger">
-    <a id="load-more-photos" class="bouton-link" href="#">Toutes les photos</a>
+    <div>
+    <a class="bouton-link" href="/">Toutes les photos</a>
+    </div>
 </div>
 
 </main>
 </body>
+
 </html>
 <?php get_footer(); ?>
