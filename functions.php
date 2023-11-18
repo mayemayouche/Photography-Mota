@@ -79,6 +79,7 @@ add_action('wp_ajax_nopriv_charger_plus_photos', 'charger_plus_photos');
 //filtres ajax
 add_action('wp_ajax_filter_photos_by_category', 'filter_photos_by_category_function');
 add_action('wp_ajax_nopriv_filter_photos_by_category', 'filter_photos_by_category_function');
+
 function filter_photos_by_category_function() {
     // Vérification de la sécurité
     check_ajax_referer('charger_plus_photos', 'security');
@@ -174,4 +175,6 @@ function filter_post_navigation($where){
 
 add_filter('get_next_post_where', 'filter_post_navigation');
 add_filter('get_previous_post_where', 'filter_post_navigation');
+
+
 ?>

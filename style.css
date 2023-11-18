@@ -116,11 +116,9 @@ form {
 /*menu navigation*/
 .site-header {
     display: flex;
-    max-width: 1148px;
 }
 
 header {
-    display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 19px;
@@ -196,6 +194,9 @@ p {
 
 
 .photohead {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-image: url("./images/nathalie-11.png");
     background-size: cover;
     /* L'image couvrira tout le conteneur sans déformation */
@@ -205,15 +206,13 @@ p {
     height: 962px;
 }
 
-.contenttitre {
-    display: flex;
+.contenttitre{
+    display:flex;
     justify-content: center;
-    margin:auto;
 }
 
 .titre {
-    width: 1000px;
-    margin-top: 480px;
+    width: 90%;
 }
 
 /*menu*/
@@ -248,10 +247,10 @@ p {
 .mobile-menu {
     background-color: red;
     position: absolute;
-    top: 10%;
+    top: 6%;
     z-index: 999;
     width: 100%;
-    height: 100%;
+    height: 100vh;
     display: none;
 }
 .mobile-menu li{
@@ -403,7 +402,10 @@ color: white; /* Définissez la couleur du texte sur blanc */
 /* Galerie*/
 
 .photo-title,
-.photo-category {
+.photo-category,
+#lightbox-reference,
+#lightbox-category,
+.lightbox-nav {
     font-size: 14px;
     font-family: poppins;
     font-style: normal;
@@ -431,9 +433,6 @@ color: white; /* Définissez la couleur du texte sur blanc */
     /* ou la couleur que vous souhaitez */
 }
 
-.photo-category {
-    /* Styles pour la catégorie */
-}
 
 .choix {
 
@@ -443,6 +442,11 @@ color: white; /* Définissez la couleur du texte sur blanc */
 #filter-form{
     display: flex;
     flex-direction: row;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    width:100%,
+
 }
 #categorie-filtre,#format-filtre, #date-filtre {
     width: 260px;
@@ -457,18 +461,19 @@ color: white; /* Définissez la couleur du texte sur blanc */
 
 
 
-
 .lemenu {
     display: flex; /* Utilisez l'affichage flex */
+    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between; /* Alignez les éléments horizontalement avec un espacement entre eux */
     max-width: 1140px; /* Largeur maximale de la div lemenu */
     margin: 0 auto; /* Centre la div horizontalement */
     padding: 20px;
+
 }
 
 
 .conteneur-choix3, .conteneur-choix2 {
-   margin-top: 60px;
     display: flex;
     justify-content: flex-end;
 }
@@ -556,6 +561,16 @@ color: white; /* Définissez la couleur du texte sur blanc */
     margin: 10px;
 }
 
+.li{
+    text-align: center;
+}
+.mobile-item{
+    color: #fff;
+}
+.choices{
+    display: flex;
+    flex-direction: column;
+}
 .title-little {
     position: absolute;
     bottom: 0;
@@ -563,7 +578,9 @@ color: white; /* Définissez la couleur du texte sur blanc */
     left: 0;
 }
 
-
+.plus{
+    width: 100%;
+}
 .photo-category {
     margin: 0;
     color: #fff;
@@ -578,7 +595,6 @@ color: white; /* Définissez la couleur du texte sur blanc */
     display: flex;
     justify-content: center;
     padding-top:50px ;
-    width:1140px;
 }
 .site__footer li{
     padding-top:50px ;
@@ -658,6 +674,7 @@ text-transform: uppercase;}
 #lightbox-reference,
 #lightbox-category {
     margin: 0 10px; /* Espace entre les éléments */
+
 }
     #lightbox-image {
         object-fit: contain;
@@ -669,7 +686,6 @@ text-transform: uppercase;}
     .lightbox-nav {
         position: relative;
         color: white;
-        font-size: 24px;
         cursor: pointer;
         user-select: none;
     }
@@ -714,23 +730,65 @@ text-transform: uppercase;}
     .headermenu {
         display: none;
     }
+.site-header{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+}
 .photohead{
     width: 100%;
 }
-.contenttitre{
-    width: 50%;
+
+#categorie-filtre,
+#format-filtre{
+    margin-bottom: 10px;
+}
+.contenuphoto{
+    width: 90vw;
+    display: flex;
+    justify-content: center;
 }
     .row {
+        display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
     }
-        .contenuphoto {
-            width: 100%;
-        }
+.site_footer li{
+    display: flex;
+    width:100vw ;
+    padding-top: 0;
+}
     .menu-burger-toggle {
         display: block;
     }
 
-    .li {
-        padding: 10px;
+    #menu-item-21,
+    #menu-item-22,
+     {
+        text-align: center;
     }
+
+    .conteneur-choix2,
+    .conteneur-choix3{
+display:flex;
+flex-wrap:wrap;
+margin:0px;
+justify-content: center;
+    }
+
+    #menu-bas-de-page{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 0;
+    }
+
+#filter-form{
+    flex-direction: column;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+.menu-bas-de-page-container{
+    display: flex;
+}
 }

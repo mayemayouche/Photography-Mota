@@ -43,21 +43,33 @@ jQuery(document).ready(function($) {
     });
 });
 
-//RECUPERATION DONNES DANS LIGHTBOX
+//RECUPERATION DONNES DANS LIGHTBOX 
 jQuery(document).ready(function($) {
+    var currentImageIndex;
+    var totalImages = $('.full-screen').length;
+
     $('.full-screen').on('click', function() {
-        var fullImageUrl = $(this).data('fullimage');
-        var category = $(this).data('category');
-        var reference = $(this).data ('reference');
+        currentImageIndex = $(this).data('index');
+        updateLightbox($(this));
 
-
-        // Mettre à jour la source de l'image et les informations dans la lightbox
-        $('#lightbox-image').attr('src', fullImageUrl);
-        $('#lightbox-reference').text(reference);
-        $('#lightbox-category').text(category);
-       
         // Afficher la lightbox
         $('#lightbox-container').show();
+    });
+
+    $('#lightbox-nav-left').on('click', function() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            updateLightbox($('.full-screen').eq(currentImageIndex));
+        }
+    });
+
+    $('#lightbox-nav-right').on('click', function() {
+        console.log("Clic sur Suivant détecté");
+        console.log("Index actuel avant incrementation: ", currentImageIndex);
+        if (currentImageIndex < totalImages - 1) {
+            currentImageIndex++;
+            updateLightbox($('.full-screen').eq(currentImageIndex));
+        }
     });
 
     // Gestionnaire pour fermer la lightbox
@@ -65,49 +77,23 @@ jQuery(document).ready(function($) {
         $('#lightbox-container').hide();
     });
 
-    //FAIRE DEFILER LES POSTS DANS LA LIGHTBOX ...
-    jQuery(document).ready(function($) {
-        var currentImageIndex = 0;
-        var totalImages = $('.full-screen').length;
+    function updateLightbox(element) {
+        var fullImageUrl = element.data('fullimage');
+        var category = element.data('category');
+        var reference = element.data('reference');
+
+        // Mettre à jour la source de l'image et les informations dans la lightbox
+        $('#lightbox-image').attr('src', fullImageUrl);
+        $('#lightbox-reference').text(reference);
+        $('#lightbox-category').text(category);
+    }
+});
+
     
-        $('.full-screen').on('click', function() {
-            currentImageIndex = $(this).data('index');
-            updateLightbox($(this));
-        });
-    
-        $('#lightbox-prev').on('click', function() {
-            if (currentImageIndex > 0) {
-                currentImageIndex--;
-                updateLightbox($('.full-screen').eq(currentImageIndex));
-            }
-        });
-    
-        $('#lightbox-next').on('click', function() {
-            if (currentImageIndex < totalImages - 1) {
-                currentImageIndex++;
-                updateLightbox($('.full-screen').eq(currentImageIndex));
-            }
-        });
-    
-        function updateLightbox(element) {
-            var fullImageUrl = element.data('fullimage');
-            var category = element.data('category');
-            var reference = element.data('reference');
-    
-            // Mettre à jour la source de l'image et les informations dans la lightbox
-            $('#lightbox-image').attr('src', fullImageUrl);
-            $('#lightbox-reference').text(reference);
-            $('#lightbox-category').text(category);
-        }
-    
-        // Gestionnaire pour fermer la lightbox
-        $('#lightbox-close').on('click', function() {
-            $('#lightbox-container').hide();
-        });
-    });
+
 
     //GALERIE ACCUEIL - CHARGER PLUS
-jQuery(document).ready(function($) {
+    jQuery(document).ready(function($) {
     var page = 1; // La page initiale est définie à 1
 
     $('#charger-plus').on('click', function(e) {
@@ -224,4 +210,4 @@ jQuery(document).ready(function($) {
         $images.hide().eq(currentIndex).show();
     });
 });
-});
+

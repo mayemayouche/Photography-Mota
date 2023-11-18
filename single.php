@@ -52,8 +52,9 @@
                         </div>
 
 
+
 <!-- La petite galerie des posts -->
-         <div class="petitegalerie">    
+<div class="petitegalerie">    
         <div class="post-thumbnails">
         <?php
  // Récupère le post précédent et suivant
@@ -84,6 +85,7 @@
     </div>
 </div>
                     </div>
+
 
 
 

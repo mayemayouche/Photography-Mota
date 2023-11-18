@@ -9,9 +9,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&family=Space+Mono&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;1,300&family=Poppins:wght@300&family=Space+Mono:ital,wght@0,400;1,400;1,700&display=swap" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <?php wp_head(); ?>
 </head>
 
@@ -43,14 +43,14 @@
 
         <!-- Menu mobile  -->
         <div class="mobile-menu">
-            <ul>
+            <ul class="choices">
                 <li>
-                <a href="http://photography-mota.local" aria-current="page">Accueil</a>  
+                <a href="http://photography-mota.local" aria-current="page" class="mobile-item">Accueil</a>  
                 </li>
                 <li>
-                <a href="http://photography-mota.local/a-propos/">À propos</a>
+                <a href="http://photography-mota.local/a-propos/" class="mobile-item">À propos</a>
                 </li>
-                <li><a id="popup-trigger" >Contact</a></li>
+                <li><a id="popup-trigger" class="mobile-item">Contact</a></li>
             </ul>
         </div>
         

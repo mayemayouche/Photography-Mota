@@ -26,12 +26,12 @@
                     <option value="portrait">Portrait</option>
                 </select>
             </div>
-        </div>
+        
         <div class="conteneur-choix3">
             <div class="choix">
                 <select name="date_filtre" id="date-filtre">
                     <option value="">Trier par</option>
-                    <option value="desc">Des plus récentes aux plus anciennes</option>
+                    <option value="desc" id="filtres">Des plus récentes aux plus anciennes</option>
                     <option value="asc">Des plus anciennes aux plus récentes</option>
                 </select>
             </div>
@@ -48,7 +48,9 @@
     $photos_query = new WP_Query($args);
 
     if ($photos_query->have_posts()) {
-        echo '<div class="row">';
+        echo '<div class="row">'; // Ouvrez la première ligne
+
+        $index = 0; // Initialisez le compteur d'index ici
 
         while ($photos_query->have_posts()) {
             $photos_query->the_post();
@@ -65,33 +67,35 @@
                 '<div class="icone">' .
                     '<img src="' . get_template_directory_uri() . '/images/eye-svgrepo-com.svg" class="oeil" alt="icone oeil">' .
                 '</div>' .
-                '<div class="full-screen" data-fullimage="' . wp_get_attachment_image_url(get_post_thumbnail_id(), 'small') . '" data-reference="' . $reference . '" data-category="' . $category . '">' .
+                '<div class="full-screen" data-fullimage="' . wp_get_attachment_image_url(get_post_thumbnail_id(), 'small') . '" data-reference="' . $reference . '" data-category="' . $category . '" data-index="' . $index . '">' .
                     '<img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.svg" class="full" alt="plein ecran">' .
                 '</div>' .
-                '<div class="title-little">
-                <h3 class="photo-title">' . get_the_title() . '</h3>
-                </div>
-                <div class="cat-little">
-                    <p class="photo-category">' . $category . '</p>
-                </div>
-            </div>  // Fin de overlay
-            </a>  // Fin de overlay-link
-            </div>'; // Fin de contenuphoto
-       
-   
-                // Ajoutez une condition pour fermer la ligne après chaque deux photos.
-                if ($photos_query->current_post % 2 === 1) {
-                    echo '</div><div class="row">'; // Fermez la ligne précédente et ouvrez une nouvelle ligne.
-                }
+                '<div class="title-little">' .
+                    '<h3 class="photo-title">' . $title . '</h3>' .
+                '</div>' .
+                '<div class="cat-little">' .
+                    '<p class="photo-category">' . $category . '</p>' .
+                '</div>' .
+            '</div>'  .// Fin de overlay
+            '</a>'  .// Fin de overlay-link
+            '</div>'; // Fin de contenuphoto
+
+            $index++; // Incrémentation du compteur d'index pour la prochaine image
+
+            // Fermez la ligne actuelle et ouvrez une nouvelle après chaque deux photos
+            if (($photos_query->current_post + 1) % 2 == 0 && $photos_query->current_post + 1 < $photos_query->post_count) {
+                echo '</div><div class="row">';
             }
-    
-            echo '</div>'; // Fermez la dernière ligne
-            wp_reset_postdata();
-        } else {
-            echo 'Aucune photo trouvée.';
         }
-        ?>
-    </div>
+
+        echo '</div>'; // Fermez la dernière ligne
+        wp_reset_postdata();
+    } else {
+        echo 'Aucune photo trouvée.';
+    }
+    ?>
+</div>
+
 
     <div class="plus">
     <div class="charger">
@@ -107,13 +111,13 @@
          <span id="lightbox-close">&times;</span>
 
         <!-- Navigation left -->
-        <div id="lightbox-nav-left" class="lightbox-nav">Précédente</div>
+        <div id="lightbox-nav-left" class="lightbox-nav"> <span class="ma-classe-icon">&#x2190;</span>Précédente</div>
         
         <!-- Image au milieu -->
         <img id="lightbox-image" src="" alt="Image en plein écran">
         
         <!-- Navigation right -->
-        <div id="lightbox-nav-right" class="lightbox-nav">Suivante</div>
+        <div id="lightbox-nav-right" class="lightbox-nav">Suivante <span class="ma-classe-icon">&#x2192;</span></div>
     </div>
         <div id="lightbox-info">
         <div id="lightbox-reference"></div>
