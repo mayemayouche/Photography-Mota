@@ -89,7 +89,6 @@ jQuery(document).ready(function($) {
     }
 });
 
-    
 
 
     //GALERIE ACCUEIL - CHARGER PLUS
@@ -122,7 +121,9 @@ jQuery(document).ready(function($) {
                     $row.append(photo);
                     // Après avoir ajouté deux photos on insére la div .row et on crée une nouvelle
                     if ((index + 1) % 2 === 0 || index + 1 === $photos.length) {
-                        $('.plus').before($row);
+                        // $('.plus').before($row);
+                        // $row.insertAfter('.galerie .row');
+                        $('.lagalerie .row').last().after($row);
                         $row = $('<div class="row"></div>'); // Nouvelle div .row pour les prochaines photos
                     }
                 });
@@ -211,3 +212,18 @@ jQuery(document).ready(function($) {
     });
 });
 
+jQuery(document).ready(function($) {
+    $('.contactformulaire').click(function(e) {
+        e.preventDefault();
+        $('.popup-overlay').show();
+    });
+
+    $('.popup-close').click(function() {
+        $('.popup-overlay').hide();
+    });
+});
+
+    
+    
+    
+    

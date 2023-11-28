@@ -18,7 +18,7 @@
 <body <?php body_class(); ?>>
 
     <?php wp_body_open(); ?>
-
+<div class="en-tete">
     <header class="site-header">
         <a href="/">
             <img src="<?php echo get_template_directory_uri() . '/images/Logo1.png'; ?>" class="logo" alt="logo photographe">
@@ -33,6 +33,20 @@
             )
         );
         ?>
+        </div>
+<!-- Code du bouton Contact et du Popup -->
+
+<div class="popup-overlay" style="display: none">
+    <div class="popup-salon">
+        <div class="popup-form">
+            <img src="<?php echo get_template_directory_uri() . '/images/Contactheader.png'; ?>" class="imgForm">
+            <span class="popup-close"></span>
+        </div>
+
+        <?php echo do_shortcode('[contact-form-7 id="2a201c2" title="Formulaire de contact 1"]'); ?>
+    </div>
+</div>
+
 
         <!-- Menu burger -->
         <div class="menu-burger-toggle">

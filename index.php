@@ -7,6 +7,7 @@
 </div>
 
 <main>
+
 <div class="lemenu">
     <form id="filter-form">
         <div class="conteneur-choix2">
@@ -19,6 +20,8 @@
                     <option value="concert">Concert</option>
                 </select>
             </div>
+			
+			 
             <div class="choix">
                 <select name="format_filtre" id="format-filtre">
                     <option value="">Formats</option>
@@ -26,18 +29,16 @@
                     <option value="portrait">Portrait</option>
                 </select>
             </div>
-        
-        <div class="conteneur-choix3">
+			
+   <div class="conteneur-choix3">
             <div class="choix">
                 <select name="date_filtre" id="date-filtre">
                     <option value="">Trier par</option>
                     <option value="desc" id="filtres">Des plus récentes aux plus anciennes</option>
                     <option value="asc">Des plus anciennes aux plus récentes</option>
                 </select>
-            </div>
-        </div>
-    </form>
-</div>
+            </div></div> </div></form></div>
+            
 
 <div class="lagalerie">
     <?php
@@ -58,6 +59,7 @@
             $title = get_the_title(); // Récupérer le titre
             $category = get_the_category()[0]->name;
             $reference = get_post_meta(get_the_ID(), 'reference', true); // Remplacez 'reference' par le nom réel de votre champ personnalisé
+            $description = get_post_meta(get_the_ID(), 'description', true); // Ajoutez cette ligne
 
             echo '<div class="contenuphoto">' .
             $thumbnail .

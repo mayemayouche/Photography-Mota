@@ -8,22 +8,18 @@ Version: 1.9
 */
 
 body {
-    width: 100%; /* La largeur du corps est de 100% de la fenêtre */
     max-width: 1440px; /* La largeur maximale est de 1440 pixels */
     margin: auto; /* Pour centrer le contenu */
 }
 
 main {
-    width: 100%; /* Pour s'assurer que main prend toute la largeur du body */
-    max-width: 1140px; /* Limitez la largeur du contenu à 1140 pixels */
-    margin: 0 auto; /* Pour centrer le contenu */
-}
-#primary{
     width:100%;
 }
-.site-content{
-    max-width: 1148px;
+
+.options-container .option:hover {
+    background-color: red;
 }
+
 /*popup contact*/
 .popup-overlay {
     position: fixed;
@@ -116,15 +112,19 @@ form {
 /*menu navigation*/
 .site-header {
     display: flex;
+    justify-content: space-around;
 }
 
 header {
     justify-content: space-between;
     align-items: center;
     margin-top: 19px;
-    max-width: 1440px;
+    width: 100%;
 }
 
+.en-tete{
+    display: flex;
+}
 
 a {
     text-decoration: none;
@@ -459,6 +459,31 @@ color: white; /* Définissez la couleur du texte sur blanc */
     font-weight: 700;
 }
 
+.categorie_filtre {
+    /* Styles de base pour la liste */
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.categorie_filtre .titre-categorie, .titre-format, .titre-date {
+    /* Styles pour le titre */
+    cursor: pointer; /* Indique que c'est cliquable */
+}
+
+.options-container, .options-container, .options-container {
+    display: none; /* Cache les options initialement */
+}
+
+.categorie_filtre li{
+    cursor:pointer ;
+}
+.categorie_filtre li[data-value]:hover {
+    background-color: red; /* Couleur de fond au survol */
+    color: white; /* Couleur du texte au survol */
+}
+
+/* Vous pouvez ajouter plus de styles ici selon vos besoins */
 
 
 .lemenu {
@@ -468,7 +493,6 @@ color: white; /* Définissez la couleur du texte sur blanc */
     justify-content: space-between; /* Alignez les éléments horizontalement avec un espacement entre eux */
     max-width: 1140px; /* Largeur maximale de la div lemenu */
     margin: 0 auto; /* Centre la div horizontalement */
-    padding: 20px;
 
 }
 
@@ -543,7 +567,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(128, 128, 128, 0.7);
+    background: rgba(3, 3, 3, 0.4);
     /* Couleur de fond grise semi-transparente */
     display: flex;
     align-items: center;
@@ -790,5 +814,24 @@ justify-content: center;
 }
 .menu-bas-de-page-container{
     display: flex;
+}
+
+.post-thumbnails{
+    display:none ;
+}
+.navigation-arrows{
+    display: none;
+}
+.entry-content{
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+}
+.entry-title{
+    font-size:46px ;
+    width:262px;
+}
+.imagepost{
+    width: 90%;
 }
 }
