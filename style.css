@@ -389,7 +389,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
 
 .plusplus {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     height: 118px;
     flex-direction: row;
@@ -520,6 +520,11 @@ color: white; /* Définissez la couleur du texte sur blanc */
     display: flex;
     height: 30px;
     justify-content: center;
+    cursor: pointer;
+}
+
+.le-post-thumbnail-link {
+    cursor: pointer;
 }
 
 .bouton-link {
@@ -635,12 +640,16 @@ text-transform: uppercase;}
 .petitegalerie {
     text-align: center;
     max-height: 100px;
+    padding-top: 25px;
 }
 
 .post-thumbnails {
     display: flex;
     justify-content: space-between;
     object-fit: contain;
+    width: 81px;
+    height:81px;
+    cursor: pointer;
 }
 
 .prev-post-thumbnail img,

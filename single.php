@@ -57,35 +57,37 @@
 
 <!-- La petite galerie des posts -->
 <div class="petitegalerie">    
-        <div class="post-thumbnails">
+    <div class="post-thumbnails">
         <?php
- // Récupère le post précédent et suivant
         $prev_post = get_previous_post();
         $next_post = get_next_post();
 
-        // Affiche l'image miniature du post précédent
         if (!empty($prev_post)) {
-        $prev_thumbnail = get_the_post_thumbnail($prev_post->ID, 'thumbnail');
-        echo '<div class="prev-post-thumbnail">' . $prev_thumbnail . '</div>';
-                            }
+            $prev_thumbnail_url = get_the_post_thumbnail_url($prev_post->ID, 'thumbnail');
+            $prev_post_link = get_permalink($prev_post->ID);
+            echo '<img src="' . esc_url($prev_thumbnail_url) . '" class="le-post-thumbnail prev-thumbnail" data-url="' . esc_url($prev_post_link) . '" style="display: none;">';
+        }
 
-
-        // Affiche l'image miniature du post suivant
         if (!empty($next_post)) {
-        $next_thumbnail = get_the_post_thumbnail($next_post->ID, 'thumbnail');
-        echo '<div class="next-post-thumbnail">' . $next_thumbnail . '</div>';
-                            }
-?>
-        </div>
-
-        <div class="navigation-arrows">
-        <div class="nav-arrow prev">
-            <?php previous_post_link('%link', '<img src="' . get_template_directory_uri() . '/images/arrow-left-short.svg" class="flecheG" alt="fleche gauche">'); ?>
-        </div>
-        <div class="nav-arrow next">
-            <?php next_post_link('%link', '<img src="' . get_template_directory_uri() . '/images/arrow-right-short.svg" class="flecheD" alt="fleche droite">'); ?>
-        </div>
+            $next_thumbnail_url = get_the_post_thumbnail_url($next_post->ID, 'thumbnail');
+            $next_post_link = get_permalink($next_post->ID);
+            echo '<img src="' . esc_url($next_thumbnail_url) . '" class="le-post-thumbnail next-thumbnail" data-url="' . esc_url($next_post_link) . '" style="display: none;">';
+        }
+        ?>
     </div>
+
+
+
+
+<div class="navigation-arrows">
+    <div class="nav-arrow prev">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/LineG.png" class="flecheG" alt="fleche gauche">
+    </div>
+    <div class="nav-arrow next">
+        <img src="<?php echo get_template_directory_uri(); ?>/images/LineD.png" class="flecheD" alt="fleche droite">
+    </div>
+</div>
+
 </div></div>
                   
 

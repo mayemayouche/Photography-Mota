@@ -192,25 +192,57 @@
     
     
     //GALERIE MINI DE LA PAGE SINGLE//
-    jQuery(document).ready(function($) {
-        var $navigation = $('.navigation');
-        var $images = $navigation.find('.gallery-item');
-        var currentIndex = 0; // on prend la 1ère image
-        // on cache les autres
-        $images.hide().eq(currentIndex).show();
+    // jQuery(document).ready(function($) {
+    //     var $navigation = $('.navigation');
+    //     var $images = $navigation.find('.gallery-item');
+    //     var currentIndex = 0; // on prend la 1ère image
+    //     // on cache les autres
+    //     $images.hide().eq(currentIndex).show();
     
-        // Affiche l'image précédente au click
-        $('.nav-arrow.prev').click(function() {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : $images.length - 1;
-            $images.hide().eq(currentIndex).show();
-        });
+    //     // Affiche l'image précédente au click
+    //     $('.nav-arrow.prev').click(function() {
+    //         currentIndex = (currentIndex > 0) ? currentIndex - 1 : $images.length - 1;
+    //         $images.hide().eq(currentIndex).show();
+    //     });
     
-        // Affiche l'image suivante au click
-        $('.nav-arrow.next').click(function() {
-            currentIndex = (currentIndex < $images.length - 1) ? currentIndex + 1 : 0;
-            $images.hide().eq(currentIndex).show();
+    //     // Affiche l'image suivante au click
+    //     $('.nav-arrow.next').click(function() {
+    //         currentIndex = (currentIndex < $images.length - 1) ? currentIndex + 1 : 0;
+    //         $images.hide().eq(currentIndex).show();
+    //     });
+    // });
+  
+        document.addEventListener("DOMContentLoaded", function() {
+            function displayThumbnail(thumbnailClass) {
+                var thumbnails = document.querySelectorAll('.le-post-thumbnail');
+                thumbnails.forEach(function(thumb) {
+                    thumb.style.display = 'none'; // Masque toutes les miniatures
+                });
+                var selectedThumbnail = document.querySelector('.' + thumbnailClass);
+                if (selectedThumbnail) {
+                    selectedThumbnail.style.display = 'block'; // Affiche la miniature sélectionnée
+                }
+            }
+        
+            // Gère le clic sur la flèche précédente
+            document.querySelector(".nav-arrow.prev").addEventListener("click", function() {
+                displayThumbnail('prev-thumbnail');
+            });
+        
+            // Gère le clic sur la flèche suivante
+            document.querySelector(".nav-arrow.next").addEventListener("click", function() {
+                displayThumbnail('next-thumbnail');
+            });
+        
+            // Gère le clic sur les images miniatures
+            document.querySelectorAll('.le-post-thumbnail').forEach(function(thumbnail) {
+                thumbnail.addEventListener('click', function() {
+                    console.log("Thumbnail clicked: ", thumbnail.getAttribute('data-url')); // Pour débogage
+                    window.location.href = thumbnail.getAttribute('data-url');
+                });
+            });
         });
-    });
+        
     
     jQuery(document).ready(function($) {
         $('.contactformulaire').click(function(e) {
@@ -222,8 +254,3 @@
             $('.popup-overlay').hide();
         });
     });
-    
-        
-        
-        
-        
