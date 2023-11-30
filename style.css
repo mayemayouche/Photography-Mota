@@ -112,19 +112,16 @@ form {
 /*menu navigation*/
 .site-header {
     display: flex;
-    justify-content: space-around;
 }
 
 header {
     justify-content: space-between;
     align-items: center;
     margin-top: 19px;
-    width: 100%;
 }
 
 .en-tete{
-    display: flex;
-}
+max-width: 1140px;}
 
 a {
     text-decoration: none;
@@ -279,7 +276,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     justify-content: space-between;
     align-items: flex-end;
     margin-right: 20px;
-    width: 100%;
+    max-width:1140px;
 }
 
 .contenu {
@@ -315,8 +312,9 @@ color: white; /* Définissez la couleur du texte sur blanc */
     align-items: center;
     border-bottom: 1px solid #000;
     padding-bottom: 20px;
-
+    max-width: 1140px;
 }
+
 .navigation {
     display:flex;
     width: 81px;
@@ -337,10 +335,8 @@ color: white; /* Définissez la couleur du texte sur blanc */
     object-fit: cover;
 }
 
-.menu-contact, .charger {
+.menu-contact, .charger, .Toutes {
     padding: 10px 20px;
-    /* Ajustez les marges intérieures selon vos préférences */
-    background-color: #D8D8D8;
     color: #fff;
     /* Couleur du texte du bouton */
     text-decoration: none;
@@ -348,23 +344,28 @@ color: white; /* Définissez la couleur du texte sur blanc */
     text-align: center;
     display: flex;
     justify-content: center;
-
 }
-
+.menu-contact, .Toutes{
+    background-color: #D8D8D8;
+}
 .charger{
     height: 50px;
     line-height: 50px;
     font-size: 12px;
     font-weight: 700;
     font-family: space mono;
-    margin: 25px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     color: #000000;
-
 }
 
+#charger-plus{
+    background-color:  #D8D8D8;
+}
+.lebouton{
+    display: flex;
+    justify-content: center;
+    max-width: 1140px;
+    margin-top: 20px;
+}
 #plusdephotos{
     display:flex;
     align-items: center;
@@ -401,6 +402,12 @@ color: white; /* Définissez la couleur du texte sur blanc */
 
 /* Galerie*/
 
+.conteneur-galerie{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .photo-title,
 .photo-category,
 #lightbox-reference,
@@ -426,11 +433,6 @@ color: white; /* Définissez la couleur du texte sur blanc */
 
 .icone {
     width: 46px;
-}
-
-.oeil {
-    fill: white;
-    /* ou la couleur que vous souhaitez */
 }
 
 
@@ -493,7 +495,6 @@ color: white; /* Définissez la couleur du texte sur blanc */
     justify-content: space-between; /* Alignez les éléments horizontalement avec un espacement entre eux */
     max-width: 1140px; /* Largeur maximale de la div lemenu */
     margin: 0 auto; /* Centre la div horizontalement */
-
 }
 
 
@@ -508,9 +509,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     margin-right: 20px;
 }
 .lagalerie, .galerieidem{
-    flex-wrap: wrap;
-    width: 1140px;
-    margin: 0 auto;
+    max-width: 1140px;
 }
 .narrows{
     display: flex;
@@ -619,6 +618,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     display: flex;
     justify-content: center;
     padding-top:50px ;
+    max-width: 1140px;
 }
 .site__footer li{
     padding-top:50px ;
@@ -626,6 +626,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
 .aussi{
     margin-right: 10px;
     padding: 40px 0 40px 0px;
+    max-width: 1140px;
 }
 .aussi h3{
     font-style: normal;

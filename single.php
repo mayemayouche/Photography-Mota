@@ -2,9 +2,10 @@
 
 <div id="content" class="site-content">
     <div id="primary" class="content-area">
-        <main id="main" class-site-main role="main">
+        <main id="main" class="site-main" role="main">
 
             <?php while (have_posts()) : the_post(); ?>
+            
 
                 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                     <header class="entry-header">
@@ -35,13 +36,14 @@
                             </div>
                             <div class="menu-contact">
                                 <a id="test-button" class="bouton-link" href="#" data-reference="<?php echo esc_attr(get_post_meta(get_the_ID(), 'reference', true)); ?>">Contact</a>
-                            </div>
+                            </div></div>
                             <div class="popup-overlay" style="display: none">
                                 <div class="popup-salon">
                                     <div class="popup-form">
                                         <img src="<?php echo get_template_directory_uri() . '/images/Contactheader.png'; ?>" class="imgForm">
                                         <span class="popup-close"></span>
                                     </div>
+                               
 
                                     <?php
                                     // On insère le formulaire de demandes de renseignements
@@ -49,7 +51,7 @@
                                     ?>
                                 </div>
                             </div>
-                        </div>
+                        
 
 
 
@@ -75,6 +77,7 @@
                             }
 ?>
         </div>
+
         <div class="navigation-arrows">
         <div class="nav-arrow prev">
             <?php previous_post_link('%link', '<img src="' . get_template_directory_uri() . '/images/arrow-left-short.svg" class="flecheG" alt="fleche gauche">'); ?>
@@ -83,9 +86,8 @@
             <?php next_post_link('%link', '<img src="' . get_template_directory_uri() . '/images/arrow-right-short.svg" class="flecheD" alt="fleche droite">'); ?>
         </div>
     </div>
-</div>
-                    </div>
-
+</div></div>
+                  
 
 
 
@@ -94,84 +96,20 @@
                         <h3>Vous aimerez aussi</h3>
                     </div>
                     <div class="galerieidem">
-                        <?php
-                        $current_post_categories = get_the_category();
+    <?php
+    get_template_part('content', 'photos', array('posts_per_page' => 2));
+    ?>
+</div>
 
-                        $category_ids = array();
 
-                        foreach ($current_post_categories as $category) {
-                            $category_ids[] = $category->term_id;
-                        }
-
-                        // Pour ne pas prendre le post en cours
-                        $current_post_id = get_the_ID();
-
-                        $args = array(
-                            'post_type' => 'photo',
-                            'posts_per_page' => 2,
-                            'category__in' => $category_ids,
-                            'post__not_in' => array($current_post_id)
-                        );
-
-                        $photos_query = new WP_Query($args);
-
-                        if ($photos_query->have_posts()) {
-                            echo '<div class="row">';
-
-                            while ($photos_query->have_posts()) {
-                                $photos_query->the_post();
-                                $thumbnail = wp_get_attachment_image(get_post_thumbnail_id(), array(500, 500));
-                                $title = get_the_title(); // Récupérer le titre
-                                $category = get_the_category()[0]->name;
-                                $reference = get_post_meta(get_the_ID(), 'reference', true); // Remplacez 'reference' par le nom réel de votre champ personnalisé
-                                $description = get_post_meta(get_the_ID(), 'description', true); // Ajoutez cette ligne
-                                echo '<div class="contenuphoto">' .
-                                $thumbnail .
-                                '<p class="description">' . $description . '</p>' .
-                                '<a href="' . get_permalink() . '" class="overlay-link">' .
-                                '<div class="overlay">' .
-                                    '<div class="icone">' .
-                                        '<img src="' . get_template_directory_uri() . '/images/eye-svgrepo-com.svg" class="oeil" alt="icone oeil">' .
-                                    '</div>' .
-                                    '<div class="full-screen" data-fullimage="' . wp_get_attachment_image_url(get_post_thumbnail_id(), 'small') . '" data-reference="' . $reference . '" data-category="' . $category . '">' .
-                                        '<img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.svg" class="full" alt="plein ecran">' .
-                                    '</div>' .
-                                    '<div class="title-little">' .
-                                        '<h3 class="photo-title">' . $title . '</h3>' .
-                                    '</div>' .
-                                    '<div class="cat-little">' .
-                                        '<p class="photo-category">' . $category . '</p>' .
-                                    '</div>' .
-                                '</div>'  .// Fin de overlay
-                                '</a>'  .// Fin de overlay-link
-                                '</div>'; // Fin de contenuphoto
-                                if (($photos_query->current_post + 1) % 2 == 0 && $photos_query->current_post + 1 < $photos_query->post_count) {
-                                    echo '</div><div class="row">';
-                                }
-                            }
-                            echo '</div>'; // Fermez la dernière ligne
-                            wp_reset_postdata();
-                        } else {
-                            echo 'Aucune photo trouvée.';
-                        }
-                        ?>
-                    </div>
-
-                </article>
-
-            <?php endwhile; ?>
-
-    </div>
-
-<!-- Chargement des photos en plus (id="load-more-photos" )-->
-<div class="charger">
-    <div>
+<div class="lebouton">
+<div class="Toutes">   
     <a class="bouton-link" href="/">Toutes les photos</a>
     </div>
 </div>
-
+</article>
+<?php endwhile; ?>
 </main>
-</body>
+ 
 
-</html>
 <?php get_footer(); ?>
