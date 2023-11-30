@@ -15,12 +15,12 @@
     <?php wp_head(); ?>
 </head>
 
-<body <?php body_class(); ?>>
+<body>
 
     <?php wp_body_open(); ?>
 <div class="en-tete">
     <header class="site-header">
-        <a href="/">
+        <a href="/" class="logoMota">
             <img src="<?php echo get_template_directory_uri() . '/images/Logo1.png'; ?>" class="logo" alt="logo photographe">
         </a>
 
@@ -50,10 +50,14 @@
 
         <!-- Menu burger -->
         <div class="menu-burger-toggle">
+            <div class="logoMota" a href="/">
+            <img src="<?php echo get_template_directory_uri() . '/images/Logo1.png'; ?>" class="logo" alt="logo photographe">
+        </a></div>
+        <div class="Burger">
+        <div class="bar"></div>
             <div class="bar"></div>
             <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
+        </div></div>
 
         <!-- Menu mobile  -->
         <div class="mobile-menu">

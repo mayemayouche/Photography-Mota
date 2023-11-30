@@ -11,7 +11,9 @@ body {
     max-width: 1440px; /* La largeur maximale est de 1440 pixels */
     margin: auto; /* Pour centrer le contenu */
 }
-
+.single {
+    max-width: 1140px;
+}
 main {
     width:100%;
 }
@@ -112,6 +114,7 @@ form {
 /*menu navigation*/
 .site-header {
     display: flex;
+    justify-content: space-around;
 }
 
 header {
@@ -119,15 +122,18 @@ header {
     align-items: center;
     margin-top: 19px;
 }
-
-.en-tete{
-max-width: 1140px;}
+.headermenu{
+    margin-left:300px;
+}
 
 a {
     text-decoration: none;
     color: black;
 }
 
+.mobile-menu{
+    display: none;
+}
 
 li {
     padding: 10px 25px;
@@ -140,8 +146,9 @@ li {
 }
 
 .logo {
-    width: auto;
+    width: 200px;
     height: auto;
+    padding: 20px;
 }
 
 .admin-bar .menu {
@@ -219,46 +226,6 @@ p {
     display: none;
 }
 
-.bar {
-    width: 30px;
-    height: 3px;
-    background-color: #333;
-    margin: 6px 0;
-    transition: transform 0.4s;
-}
-
-/* Appliquer une rotation aux barres pour les transformer en croix */
-.menu-burger-toggle.open .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-6px, 6px);
-}
-
-.menu-burger-toggle.open .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-burger-toggle.open .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-6px, -6px);
-}
-
-
-.mobile-menu {
-    background-color: red;
-    position: absolute;
-    top: 6%;
-    z-index: 999;
-    width: 100%;
-    height: 100vh;
-    display: none;
-}
-.mobile-menu li{
-display: flex;
-flex-direction: row;
-font-size: 44px;
-font-weight: 400;
-text-transform: uppercase;
-justify-content: center;
-color: white; /* Définissez la couleur du texte sur blanc */
-}
 
 /*single*/
 .entry-title {
@@ -592,12 +559,12 @@ color: white; /* Définissez la couleur du texte sur blanc */
 .li{
     text-align: center;
 }
-.mobile-item{
-    color: #fff;
-}
+
 .choices{
     display: flex;
     flex-direction: column;
+    padding: 0;
+    margin-top: 50%;
 }
 .title-little {
     position: absolute;
@@ -625,9 +592,7 @@ color: white; /* Définissez la couleur du texte sur blanc */
     padding-top:50px ;
     max-width: 1140px;
 }
-.site__footer li{
-    padding-top:50px ;
-}
+
 .aussi{
     margin-right: 10px;
     padding: 40px 0 40px 0px;
@@ -761,22 +726,79 @@ text-transform: uppercase;}
 
 
 @media (max-width: 768px) {
+
     .headermenu {
         display: none;
     }
+.photohead{
+height:253px;
+}
 .site-header{
-    display: flex;
+    display: none;
     justify-content: center;
     justify-content: space-around;
 }
-.photohead{
-    width: 100%;
+.logoMota{
+    width:50px;
+}
+
+.burger{
+    display: flex;
+    flex-direction: column;
+}
+.bar {
+    width: 30px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+    transition: transform 0.4s;
+}
+
+/* Appliquer une rotation aux barres pour les transformer en croix */
+.menu-burger-toggle.open .bar:nth-child(1) {
+    transform: rotate(-45deg) translate(-6px, 6px);
+}
+
+.menu-burger-toggle.open .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-burger-toggle.open .bar:nth-child(3) {
+    transform: rotate(45deg) translate(-6px, -6px);
+}
+
+.Burger{
+    padding: 10px;
+}
+.mobile-menu {
+    background-color: red;
+    position: absolute;
+    top: 15%;
+    z-index: 999;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+}
+
+.mobile-item{
+    color: #fff;
+}
+.mobile-menu li{
+display: flex;
+flex-direction: row;
+font-size: 44px;
+font-weight: 400;
+line-height: 66px
+text-transform: uppercase;
+justify-content: center;
+color: white; /* Définissez la couleur du texte sur blanc */
 }
 
 #categorie-filtre,
 #format-filtre{
     margin-bottom: 10px;
 }
+
 .contenuphoto{
     width: 90vw;
     display: flex;
@@ -787,21 +809,24 @@ text-transform: uppercase;}
         flex-wrap: wrap;
         flex-direction: column;
     }
-.site_footer li{
-    display: flex;
-    width:100vw ;
+
+    .site__footer{
     padding-top: 0;
 }
     .menu-burger-toggle {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+
     }
 
-    #menu-item-21,
-    #menu-item-22,
-     {
+    .menu-item-21 {
         text-align: center;
+        padding:10px;
     }
-
+    .menu-item-22 {
+        text-align: center;
+        padding:10px;
+    }
     .conteneur-choix2,
     .conteneur-choix3{
 display:flex;
@@ -837,11 +862,36 @@ justify-content: center;
     flex-direction: column-reverse;
     align-items: center;
 }
+
+.plusplus {
+    display: flex;
+    height: 118px;
+    flex-direction: column;
+    width:auto;
+    align-items: center;
+}
+.contenu{
+    border-bottom: none;
+}
+
+.plusphoto {
+text-align: center;
+}
 .entry-title{
     font-size:46px ;
     width:262px;
 }
 .imagepost{
     width: 90%;
+}
+.aussi h3 {
+text-align: center;
+}
+.middle{
+    border-top: 1px solid #000;
+    justify-content: center;
+}
+.galerieidem{
+    margin-left: 12px;
 }
 }

@@ -1,4 +1,5 @@
-<?php get_header(); ?>
+<body class="single">
+    <?php get_header(); ?>
 
 <div id="content" class="site-content">
     <div id="primary" class="content-area">
@@ -112,6 +113,7 @@
 </article>
 <?php endwhile; ?>
 </main>
- 
+
 
 <?php get_footer(); ?>
+<
