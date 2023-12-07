@@ -414,8 +414,7 @@ p {
     margin-top: 40px;
     margin-bottom: 40px;
     flex-wrap: wrap;
-    width:100%,
-
+justify-content: flex-start;
 }
 #categorie-filtre,#format-filtre, #date-filtre {
     width: 260px;
@@ -447,11 +446,79 @@ p {
 .categorie_filtre li{
     cursor:pointer ;
 }
-.categorie_filtre li[data-value]:hover {
-    background-color: red; /* Couleur de fond au survol */
-    color: white; /* Couleur du texte au survol */
-}
+    .dropdown {
+        position: relative;
+        
 
+    }
+    
+    .dropdown-toggleF, .dropdown-toggleC,  .dropdown-toggleD {
+    width: 260px;
+    height: 52px;
+    border-color:#B8BBC2, solid 1px ;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-family: poppins;
+    font-weight: 500;
+    background-color: #fff;
+    text-align: left;
+    padding-left: 20px;
+    cursor:pointer ;
+    }
+    
+
+    .dropdown-toggleC::after {
+        content: " ▼"; /* Chevron vers le bas */
+        margin-left: 130px;
+    }
+
+    .dropdown-toggleF::after{
+        content: " ▼"; /* Chevron vers le bas */
+        margin-left: 150px;
+    }
+
+    .dropdown-toggleD::after {
+        content: " ▼"; /* Chevron vers le bas */
+        margin-left: 150px;
+    }
+
+    .dropdown-menu {
+        display: none;
+        position: absolute;
+        width: 260px; /* Fait en sorte que le menu ait la même largeur que .dropdown-toggle */
+        box-sizing: border-box; /* Assure que le padding et la bordure sont inclus dans la largeur */
+        background-color: #fff; /* Couleur de fond du menu */
+        border-radius: 8px; /* Rayon de la bordure */
+        margin-top: 5px; /* Un petit espace entre le bouton et le menu déroulant */
+        padding-left: 0;
+        z-index:10 ;
+    }
+       
+    
+    
+    .dropdown-menu.open {
+        display: block;
+    }
+    
+    .dropdown-menu li {
+        font-size: 12px;
+    font-family: poppins;
+    font-weight: 700;
+    text-transform:capitalize ;
+    width: 260px; /* Assure que chaque élément de la liste occupe toute la largeur du menu */
+    box-sizing: border-box; /* Assure que le padding est inclus dans la largeur */
+    text-align: left; /* Alignement du texte à gauche */
+    cursor: pointer; /* Change le curseur pour indiquer qu'il s'agit d'un élément cliquable */
+    margin:0;
+}
+    
+    
+    .dropdown-menu li:hover {
+        background-color:#E00000;
+        color: white;
+    }
+    
 /* Vous pouvez ajouter plus de styles ici selon vos besoins */
 
 
@@ -743,7 +810,6 @@ height:253px;
 }
 
 .burger{
-    display: flex;
     flex-direction: column;
 }
 .bar {
@@ -827,13 +893,22 @@ color: white; /* Définissez la couleur du texte sur blanc */
         text-align: center;
         padding:10px;
     }
-    .conteneur-choix2,
-    .conteneur-choix3{
-display:flex;
-flex-wrap:wrap;
-margin:0px;
-justify-content: center;
-    }
+  
+
+        .lemenu{
+            display: flex;
+            overflow-x: auto;
+            padding-left: 15px;
+            scrollbar-width: none;
+        }
+        .lemenu::-webkit-scrollbar {
+            display: none; /* Pour les navigateurs WebKit comme Chrome et Safari */
+        }
+        .conteneur-choix3{
+            margin-left: 0;
+        }
+
+    
 
     #menu-bas-de-page{
         display: flex;
@@ -842,11 +917,7 @@ justify-content: center;
         padding: 0;
     }
 
-#filter-form{
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-width: 100%;
-}
+
 .menu-bas-de-page-container{
     display: flex;
 }

@@ -12,32 +12,39 @@
     <form id="filter-form">
         <div class="conteneur-choix2">
             <div class="choix">
-                <select name="categorie_filtre" id="categorie-filtre">
-                    <option value="">Catégories</option>
-                    <option value="mariage">Mariage</option>
-                    <option value="reception">Réception</option>
-                    <option value="television">Télévision</option>
-                    <option value="concert">Concert</option>
-                </select>
+                <div class="dropdown">
+                    <button class="dropdown-toggleC" type="button">
+                        Catégories
+                    </button>
+                    <ul id="categorie-filtre-ul" class="dropdown-menu">
+                        <li data-value="mariage">Mariage</li>
+                        <li data-value="reception">Réception</li>
+                        <li data-value="television">Télévision</li>
+                        <li data-value="concert">Concert</li>
+                    </ul>
             </div>
-			
-			 
-            <div class="choix">
-                <select name="format_filtre" id="format-filtre">
-                    <option value="">Formats</option>
-                    <option value="paysage">Paysage</option>
-                    <option value="portrait">Portrait</option>
-                </select>
-            </div>
+    </form>
+</div>
+       <div class="choix">
+            <div class="dropdownf">
+                    <button class="dropdown-toggleF" type="button">
+                        Format </button>
+                <ul id="format-filtre-ul" class="dropdown-menu">
+                <li data-value="paysage">Paysage</li>
+                <li data-value="portrait">Portrait</li>
+</ul>
+            </div></div>           
 			
    <div class="conteneur-choix3">
             <div class="choix">
-                <select name="date_filtre" id="date-filtre">
-                    <option value="">Trier par</option>
-                    <option value="desc" id="filtres">Des plus récentes aux plus anciennes</option>
-                    <option value="asc">Des plus anciennes aux plus récentes</option>
-                </select>
-            </div></div> </div></form></div>
+            <div class="dropdownd">
+                    <button class="dropdown-toggleD" type="button">
+                        Trier par </button>
+                        <ul id="date-filtre-ul" class="dropdown-menu">
+                    <li data-value="desc" id="filtres">Des plus récentes aux plus anciennes</li>
+                    <li data-value="asc">Des plus anciennes aux plus récentes</li>
+</ul>
+            </div> </div> </div></div> </div></form></div>
             
 <div class="conteneur-galerie">
 <div class="lagalerie">

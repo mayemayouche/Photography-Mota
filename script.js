@@ -169,79 +169,138 @@
         });
     });
     
-    //GESTION DES FILTRES SUR LES MENUS DEROULANTS
-    jQuery(document).ready(function($) {
-        $('#filter-form select').change(function() { //recupere les elements ayant cet id
-            var formData = $('#filter-form').serialize();//recupere les champs d'un formulaire
-            //et les convertit en chaine de requete (format+titre par exemple).c'est une methode JQuery
+
     
+    //GESTION DES FILTRES SUR LES MENUS DEROULANTS
+    // jQuery(document).ready(function($) {
+    //     $('#filter-form select').change(function() { //recupere les elements ayant cet id
+    //         var formData = $('#filter-form').serialize();//recupere les champs d'un formulaire
+    //         //et les convertit en chaine de requete (format+titre par exemple).c'est une methode JQuery
+    
+    //         $.ajax({
+    //             url: frontendajax.ajaxurl,
+    //             type: 'POST',
+    //             data: {
+    //                 'action': 'filter_photos_by_category', //action defini dans ma pas function -add action
+    //                 'security': frontendajax.security,
+    //                 'formData': formData
+    //             },
+    //             success: function(response) {
+    //                 $('.lagalerie').html(response); // Met à jour la galerie avec la réponse
+    //             }
+    //         });
+    //     });
+    // });
+    
+    jQuery(document).ready(function($) {
+        // Gestion pour le menu 'Catégorie'
+        $('.dropdown-toggleC').click(function() {
+            $('#categorie-filtre-ul').toggleClass('open');
+        });
+    
+        $('#categorie-filtre-ul li').click(function() {
+            var value = $(this).data('value');
+            $('#filter-form').append('<input type="hidden" name="categorie_filtre" value="' + value + '">');
+            $('.dropdown-toggleC').text($(this).text());
+            $('#categorie-filtre-ul').removeClass('open');
+            triggerAjax();
+        });
+    
+        // Gestion pour le menu 'Format'
+        $('.dropdown-toggleF').click(function() {
+            $('#format-filtre-ul').toggleClass('open');
+        });
+    
+        $('#format-filtre-ul li').click(function() {
+            var value = $(this).data('value');
+            $('#filter-form').append('<input type="hidden" name="format_filtre" value="' + value + '">');
+            $('.dropdown-toggleF').text($(this).text());
+            $('#format-filtre-ul').removeClass('open');
+            triggerAjax();
+        });
+    
+        // Gestion pour le menu 'Date'
+        $('.dropdown-toggle').click(function() {
+            $('#date-filtre-ul').toggleClass('open');
+        });
+    
+        $('#date-filtre-ul li').click(function() {
+            var value = $(this).data('value');
+            $('#filter-form').append('<input type="hidden" name="date_filtre" value="' + value + '">');
+            $('.dropdown-toggle').text($(this).text());
+            $('#date-filtre-ul').removeClass('open');
+            triggerAjax();
+        });
+    
+        function triggerAjax() {
+            var formData = $('#filter-form').serialize();
+            
             $.ajax({
                 url: frontendajax.ajaxurl,
                 type: 'POST',
                 data: {
-                    'action': 'filter_photos_by_category', //action defini dans ma pas function -add action
+                    'action': 'filter_photos_by_category',
                     'security': frontendajax.security,
                     'formData': formData
                 },
                 success: function(response) {
-                    $('.lagalerie').html(response); // Met à jour la galerie avec la réponse
+                    $('.lagalerie').html(response);
                 }
             });
-        });
+        }
     });
-    
     
     //GALERIE MINI DE LA PAGE SINGLE//
     // jQuery(document).ready(function($) {
-    //     var $navigation = $('.navigation');
-    //     var $images = $navigation.find('.gallery-item');
-    //     var currentIndex = 0; // on prend la 1ère image
-    //     // on cache les autres
-    //     $images.hide().eq(currentIndex).show();
-    
-    //     // Affiche l'image précédente au click
-    //     $('.nav-arrow.prev').click(function() {
-    //         currentIndex = (currentIndex > 0) ? currentIndex - 1 : $images.length - 1;
-    //         $images.hide().eq(currentIndex).show();
-    //     });
-    
-    //     // Affiche l'image suivante au click
-    //     $('.nav-arrow.next').click(function() {
-    //         currentIndex = (currentIndex < $images.length - 1) ? currentIndex + 1 : 0;
-    //         $images.hide().eq(currentIndex).show();
-    //     });
-    // });
-  
-        document.addEventListener("DOMContentLoaded", function() {
-            function displayThumbnail(thumbnailClass) {
-                var thumbnails = document.querySelectorAll('.le-post-thumbnail');
-                thumbnails.forEach(function(thumb) {
-                    thumb.style.display = 'none'; // Masque toutes les miniatures
-                });
-                var selectedThumbnail = document.querySelector('.' + thumbnailClass);
-                if (selectedThumbnail) {
-                    selectedThumbnail.style.display = 'block'; // Affiche la miniature sélectionnée
+    //     //     var $navigation = $('.navigation');
+    //     //     var $images = $navigation.find('.gallery-item');
+    //     //     var currentIndex = 0; // on prend la 1ère image
+    //     //     // on cache les autres
+    //     //     $images.hide().eq(currentIndex).show();
+        
+    //     //     // Affiche l'image précédente au click
+    //     //     $('.nav-arrow.prev').click(function() {
+    //     //         currentIndex = (currentIndex > 0) ? currentIndex - 1 : $images.length - 1;
+    //     //         $images.hide().eq(currentIndex).show();
+    //     //     });
+        
+    //     //     // Affiche l'image suivante au click
+    //     //     $('.nav-arrow.next').click(function() {
+    //     //         currentIndex = (currentIndex < $images.length - 1) ? currentIndex + 1 : 0;
+    //     //         $images.hide().eq(currentIndex).show();
+    //     //     });
+    //     // });
+      
+            document.addEventListener("DOMContentLoaded", function() {
+                function displayThumbnail(thumbnailClass) {
+                    var thumbnails = document.querySelectorAll('.le-post-thumbnail');
+                    thumbnails.forEach(function(thumb) {
+                        thumb.style.display = 'none'; // Masque toutes les miniatures
+                    });
+                    var selectedThumbnail = document.querySelector('.' + thumbnailClass);
+                    if (selectedThumbnail) {
+                        selectedThumbnail.style.display = 'block'; // Affiche la miniature sélectionnée
+                    }
                 }
-            }
-        
-            // Gère le clic sur la flèche précédente
-            document.querySelector(".nav-arrow.prev").addEventListener("click", function() {
-                displayThumbnail('prev-thumbnail');
-            });
-        
-            // Gère le clic sur la flèche suivante
-            document.querySelector(".nav-arrow.next").addEventListener("click", function() {
-                displayThumbnail('next-thumbnail');
-            });
-        
-            // Gère le clic sur les images miniatures
-            document.querySelectorAll('.le-post-thumbnail').forEach(function(thumbnail) {
-                thumbnail.addEventListener('click', function() {
-                    console.log("Thumbnail clicked: ", thumbnail.getAttribute('data-url')); // Pour débogage
-                    window.location.href = thumbnail.getAttribute('data-url');
+            
+                // Gère le clic sur la flèche précédente
+                document.querySelector(".nav-arrow.prev").addEventListener("click", function() {
+                    displayThumbnail('prev-thumbnail');
+                });
+            
+                // Gère le clic sur la flèche suivante
+                document.querySelector(".nav-arrow.next").addEventListener("click", function() {
+                    displayThumbnail('next-thumbnail');
+                });
+            
+                // Gère le clic sur les images miniatures
+                document.querySelectorAll('.le-post-thumbnail').forEach(function(thumbnail) {
+                    thumbnail.addEventListener('click', function() {
+                        console.log("Thumbnail clicked: ", thumbnail.getAttribute('data-url')); // Pour débogage
+                        window.location.href = thumbnail.getAttribute('data-url');
+                    });
                 });
             });
-        });
         
     
     jQuery(document).ready(function($) {
@@ -254,3 +313,11 @@
             $('.popup-overlay').hide();
         });
     });
+
+    var mySwiper = new Swiper('.swiper', {
+        // Paramètres de Swiper
+        slidesPerView: 'auto',
+        spaceBetween: 30,
+        freeMode: true,
+    });
+    
